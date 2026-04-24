@@ -18,6 +18,10 @@ UI-ISSUES-REPORT.md
 *.jpeg
 *.pdf
 
+# But DO track site images in public/assets
+!public/assets/
+!public/assets/**
+
 # Irrelevant Folders
 site-pages/
 reference_frames/
