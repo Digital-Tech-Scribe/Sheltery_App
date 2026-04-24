@@ -1,0 +1,159 @@
+.entrance {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(220, 203, 179, 0.04), transparent 22%),
+    linear-gradient(180deg, #10211c 0%, #08120f 100%);
+  opacity: 1;
+  transition: opacity 680ms ease, visibility 680ms ease;
+}
+
+.entrance::before,
+.entrance::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.entrance::before {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 23.5%,
+      rgba(242, 241, 237, 0.03) 23.7%,
+      transparent 24%,
+      transparent 47.5%,
+      rgba(242, 241, 237, 0.03) 47.7%,
+      transparent 48%,
+      transparent 71.5%,
+      rgba(242, 241, 237, 0.03) 71.7%,
+      transparent 72%
+    );
+  opacity: 0.5;
+}
+
+.entrance::after {
+  background:
+    radial-gradient(circle at center, transparent 45%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.04), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.18));
+}
+
+.entrance.is-exiting {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.entrance__scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.entrance__meta {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(3.4rem, 9.5vh, 5rem);
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 0.95rem;
+  width: min(21rem, calc(100vw - 3rem));
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.entrance__caption {
+  margin: 0;
+  color: rgba(242, 241, 237, 0.84);
+  font-size: 0.62rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.28rem;
+  text-transform: uppercase;
+}
+
+.entrance__glyph {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 4.8rem;
+  height: 0.95rem;
+}
+
+.entrance__glyph-ring,
+.entrance__glyph-stem,
+.entrance__glyph-tooth {
+  position: absolute;
+  display: block;
+}
+
+.entrance__glyph-ring {
+  top: 50%;
+  left: 0.3rem;
+  width: 0.46rem;
+  height: 0.46rem;
+  border: 1px solid rgba(220, 203, 179, 0.78);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.entrance__glyph-stem {
+  top: 50%;
+  left: 0.94rem;
+  width: 2.3rem;
+  height: 1px;
+  background: rgba(220, 203, 179, 0.72);
+  transform: translateY(-50%);
+}
+
+.entrance__glyph-tooth {
+  top: calc(50% + 0.06rem);
+  left: 3.08rem;
+  width: 1.06rem;
+  height: 0.52rem;
+  border: 1px solid rgba(220, 203, 179, 0.72);
+  border-top: 0;
+  border-left: 0;
+}
+
+.entrance__skip {
+  position: absolute;
+  right: clamp(1.1rem, 3vw, 2rem);
+  bottom: clamp(1.1rem, 3vw, 2rem);
+  z-index: 3;
+  border: 1px solid rgba(220, 203, 179, 0.18);
+  padding: 0.82rem 1.02rem;
+  background: rgba(7, 13, 11, 0.08);
+  color: rgba(242, 241, 237, 0.6);
+  font-size: 0.58rem;
+  letter-spacing: 0.22rem;
+  text-transform: uppercase;
+  transition:
+    border-color var(--transition-standard),
+    background-color var(--transition-standard),
+    color var(--transition-standard);
+  cursor: pointer;
+}
+
+.entrance__skip:hover {
+  border-color: rgba(220, 203, 179, 0.48);
+  background: rgba(220, 203, 179, 0.06);
+  color: rgba(242, 241, 237, 1);
+}
+
+@media (max-width: 720px) {
+  .entrance__caption {
+    font-size: 0.55rem;
+    letter-spacing: 0.18rem;
+  }
+
+  .entrance__skip {
+    right: 50%;
+    bottom: 1.5rem;
+    transform: translateX(50%);
+  }
+}

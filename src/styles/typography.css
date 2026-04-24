@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap");
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--c1);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 0.98;
+  font-weight: 400;
+}
+
+p {
+  line-height: 1.75;
+}

@@ -1,0 +1,87 @@
+.vision {
+  padding-top: clamp(4rem, 7vw, 6rem);
+  padding-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+.vision__inner {
+  padding: 0;
+}
+
+.vision__canvas {
+  --vision-fill-progress: 0;
+  position: relative;
+  overflow: hidden;
+  padding:
+    clamp(4rem, 7vw, 5.6rem)
+    clamp(1rem, 2.4vw, 1.8rem)
+    clamp(4rem, 6vw, 5.2rem)
+    clamp(4.6rem, 9vw, 6.8rem);
+  text-align: left;
+  isolation: isolate;
+}
+
+.vision__eyebrow {
+  justify-content: flex-start;
+}
+
+.vision__content {
+  position: relative;
+  z-index: 1;
+}
+
+.vision__stack {
+  position: relative;
+  width: min(84rem, calc(100vw - 8rem));
+  margin: 1.6rem 0 0;
+}
+
+.vision__ghost,
+.vision__ghost-fill {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(4.2rem, 8vw, 7.8rem);
+  line-height: 0.91;
+  letter-spacing: -0.08em;
+  text-align: left;
+}
+
+.vision__ghost {
+  position: relative;
+  color: rgba(220, 203, 179, 0.065);
+}
+
+.vision__ghost-fill {
+  position: absolute;
+  inset: 0;
+  color: rgba(242, 241, 237, 0.98);
+  clip-path: inset(calc((1 - var(--vision-fill-progress)) * 100%) 0 0 0);
+  pointer-events: none;
+  user-select: none;
+  transition: clip-path 120ms linear;
+  will-change: clip-path;
+}
+
+.vision__line {
+  display: block;
+}
+
+@media (max-width: 720px) {
+  .vision__canvas {
+    padding:
+      3.5rem
+      1rem
+      3.5rem
+      1rem;
+  }
+
+  .vision__stack {
+    width: min(36rem, calc(100vw - 2rem));
+    margin-top: 1.25rem;
+  }
+
+  .vision__ghost,
+  .vision__ghost-fill {
+    font-size: clamp(2.85rem, 12.2vw, 4.5rem);
+    line-height: 0.93;
+  }
+}

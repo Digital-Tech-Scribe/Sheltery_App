@@ -1,0 +1,49 @@
+:root {
+  --c1: #f2f1ed;
+  --c2: #dccbb3;
+  --c3: #141414;
+  --c4: #152621;
+  --c5: #f3eae1;
+  --g1: linear-gradient(180deg, rgba(21, 38, 33, 0.2), rgba(0, 0, 0, 0.78));
+  --font-display: "Nanum Myeongjo", Georgia, serif;
+  --font-body: "Jost", "Helvetica Neue", Arial, sans-serif;
+  --container: min(1180px, calc(100vw - 2.5rem));
+  --section-space: clamp(5rem, 8vw, 8rem);
+  --radius-sm: 18px;
+  --radius-md: 24px;
+  --radius-lg: 30px;
+  --radius-xl: 40px;
+  --shadow-luxury: 0 28px 70px rgba(0, 0, 0, 0.28);
+  --text-muted: rgba(242, 241, 237, 0.72);
+  --text-soft: rgba(242, 241, 237, 0.88);
+  --text-dark-muted: rgba(20, 20, 20, 0.72);
+  --border-light: rgba(220, 203, 179, 0.16);
+  --transition-standard: 280ms ease;
+  color: var(--c1);
+  font-family: var(--font-body);
+  background: var(--c4);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--c4);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}

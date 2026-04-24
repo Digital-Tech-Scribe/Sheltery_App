@@ -1,0 +1,33 @@
+.whatsapp-widget {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(220, 203, 179, 0.16);
+  background: rgba(7, 13, 11, 0.92);
+  color: #25d366;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(18px);
+}
+
+.whatsapp-widget svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+}
+
+.whatsapp-widget span {
+  display: none;
+}
