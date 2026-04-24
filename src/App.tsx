@@ -86,7 +86,7 @@ function App() {
       </div>
       {showEntrance ? (
         <Entrance
-          backgroundImage={heroContent.backgroundImage ?? "./assets/hero-lagos.jpg"}
+          backgroundImage={heroContent.backgroundImage ?? import.meta.env.BASE_URL + "assets/hero-lagos.jpg"}
           onComplete={handleEntranceComplete}
         />
       ) : null}
