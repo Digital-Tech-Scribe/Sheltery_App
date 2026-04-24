@@ -33,7 +33,7 @@ export const heroContent: HeroContent = {
     "Unlock the true potential of your\nLagos real estate investment",
   primaryCta: "Investment Inquiry",
   secondaryCta: "Explore Our Story",
-  backgroundImage: "/assets/hero-lagos.jpg",
+  backgroundImage: "./assets/hero-lagos.jpg",
   highlights: [
     "Trusted advisory for local and diaspora buyers",
     "Curated listings, launches, and investment guidance",
@@ -50,7 +50,7 @@ export const heroQuoteContent: HeroContent = {
   subtitle: "",
   primaryCta: "",
   secondaryCta: "",
-  backgroundImage: "/assets/hero-lagos.jpg",
+  backgroundImage: "./assets/hero-lagos.jpg",
   highlights: [],
   floatingCardTitle: "",
   floatingCardCopy: "",
@@ -63,11 +63,11 @@ export const heroInvestmentContent: HeroContent = {
   body: "Our investment advisory helps you identify high-potential opportunities across Lagos-prime locations, with due diligence, rental yield projections, and exit strategy planning.",
   primaryCta: "Explore Our Story",
   secondaryCta: "",
-  backgroundImage: "/assets/hero-lagos.jpg",
+  backgroundImage: "./assets/hero-lagos.jpg",
   highlights: [],
   floatingCardTitle: "",
   floatingCardCopy: "",
-  secondaryImage: "/assets/investment-property.jpg"
+  secondaryImage: "./assets/investment-property.jpg"
 };
 
 export const heroJoinContent: HeroContent = {
@@ -82,7 +82,7 @@ export const heroJoinContent: HeroContent = {
   quoteAttribution: "— Azzizzat Oduwole, Founder",
   primaryCta: "Join Now",
   secondaryCta: "",
-  backgroundImage: "/assets/hero-lagos.jpg",
+  backgroundImage: "./assets/hero-lagos.jpg",
   floatingCardTitle: "",
   floatingCardCopy: ""
 };
@@ -96,7 +96,7 @@ export const aboutContent: AboutContent = {
     "Today, The Sheltery combines market knowledge, negotiation skill, and a highly personal client experience to make complex transactions feel measured, seamless, and secure."
   ],
   ctaLabel: "Learn More",
-  image: "/assets/founder-portrait.jpg",
+  image: "./assets/founder-portrait.jpg",
   metrics: [
     { value: "5+", label: "Years of momentum" },
     { value: "5K+", label: "Realtors trained and reached" },
@@ -180,7 +180,7 @@ export const storiesContent: StoriesContent = {
     "https://www.youtube.com/embed/gpZxniPDy4w?rel=0&modestbranding=1&playsinline=1",
   videoTitle:
     "Lekki Atlantic City: answering client questions and protecting their interests with the developer",
-  posterImage: "/assets/luxury-walkway.jpg",
+  posterImage: "./assets/luxury-walkway.jpg",
   testimonials: [
     {
       quote:
