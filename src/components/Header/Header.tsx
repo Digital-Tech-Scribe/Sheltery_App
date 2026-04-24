@@ -1,29 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { HeaderContent as HeaderContentType, NavItem } from "../../types";
 import "./Header.css";
 
 interface HeaderProps {
   content: HeaderContentType;
+  activeSection: string;
   isSticky: boolean;
   onNavigate: (target: string) => void;
 }
 
 function NavLink({
   item,
+  isActive,
   onNavigate,
   onAfterNavigate
 }: {
   item: NavItem;
+  isActive?: boolean;
   onNavigate: (target: string) => void;
   onAfterNavigate?: () => void;
 }) {
   if (item.href) {
     return (
       <a
-        className="header__link"
+        className={`header__link ${isActive ? "is-active" : ""}`}
         href={item.href}
         target={item.external ? "_blank" : undefined}
         rel={item.external ? "noreferrer" : undefined}
+        aria-current={isActive ? "page" : undefined}
         onClick={onAfterNavigate}
       >
         {item.label}
@@ -33,8 +37,9 @@ function NavLink({
 
   return (
     <button
-      className="header__link"
+      className={`header__link ${isActive ? "is-active" : ""}`}
       type="button"
+      aria-current={isActive ? "page" : undefined}
       onClick={() => {
         if (!item.target) {
           return;
@@ -49,9 +54,17 @@ function NavLink({
   );
 }
 
-export function Header({ content, isSticky, onNavigate }: HeaderProps) {
+export function Header({ content, activeSection, isSticky, onNavigate }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const mobileNav = [...content.leftNav, ...content.rightNav];
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
     <header className={`header ${isSticky ? "header--sticky" : ""}`}>
@@ -62,6 +75,7 @@ export function Header({ content, isSticky, onNavigate }: HeaderProps) {
               <NavLink
                 key={item.label}
                 item={item}
+                isActive={item.target === activeSection}
                 onNavigate={onNavigate}
               />
             ))}
@@ -84,6 +98,7 @@ export function Header({ content, isSticky, onNavigate }: HeaderProps) {
               <NavLink
                 key={item.label}
                 item={item}
+                isActive={item.target === activeSection}
                 onNavigate={onNavigate}
               />
             ))}
@@ -127,6 +142,7 @@ export function Header({ content, isSticky, onNavigate }: HeaderProps) {
               <NavLink
                 key={item.label}
                 item={item}
+                isActive={item.target === activeSection}
                 onNavigate={onNavigate}
                 onAfterNavigate={() => setIsMenuOpen(false)}
               />

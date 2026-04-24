@@ -1,0 +1,243 @@
+- generic [ref=e2]:
+  - generic:
+    - banner:
+      - generic:
+        - navigation "Primary":
+          - generic:
+            - button "Home"
+            - button "About"
+            - button "Investments"
+          - button "The SHELTERY Lagos, Nigeria":
+            - generic: The
+            - generic: SHELTERY
+            - generic: Lagos, Nigeria
+          - generic:
+            - button "Team"
+            - button "Contact"
+            - link "+234 809 279 9692":
+              - /url: tel:+2348092799692
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - heading "The Sheltery Expert Approach" [level=1]:
+              - generic: The Sheltery
+              - generic: Expert Approach
+          - generic:
+            - paragraph: Unlock the true potential of your Lagos real estate investment
+            - generic:
+              - button "Investment Inquiry"
+        - button:
+          - generic: ‹
+          - generic: ›
+      - generic:
+        - generic:
+          - generic:
+            - generic: About Us
+            - heading "The Sheltery brings trust, taste, and strategy to every property decision." [level=2]
+          - generic:
+            - generic:
+              - img "The Sheltery founder portrait"
+          - generic:
+            - generic:
+              - paragraph: Founded by Azzizzat Oduwole, The Sheltery grew from a simple instinct to help people move property with confidence into a fast-rising Lagos real estate brand known for responsiveness, clarity, and follow-through.
+              - paragraph: The brand serves buyers, investors, and families who want more than listings. They want context, honest guidance, and a partner who understands the emotional and financial weight behind every move.
+              - paragraph: Today, The Sheltery combines market knowledge, negotiation skill, and a highly personal client experience to make complex transactions feel measured, seamless, and secure.
+            - generic:
+              - generic:
+                - generic: 5+
+                - generic: Years of momentum
+              - generic:
+                - generic: 5K+
+                - generic: Realtors trained and reached
+              - generic:
+                - generic: Lagos
+                - generic: Market rooted, globally minded
+            - button "Learn More"
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic: Vision
+            - generic:
+              - paragraph:
+                - generic: To revolutionise the
+                - generic: real estate landscape
+                - generic: and become the
+                - generic: heartbeat of trust,
+                - generic: dependability, and
+                - generic: competence.
+              - paragraph:
+                - generic: To revolutionise the
+                - generic: real estate landscape
+                - generic: and become the
+                - generic: heartbeat of trust,
+                - generic: dependability, and
+                - generic: competence.
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic: Growth in Review
+              - heading "Measured momentum with people at the center." [level=2]
+            - paragraph: These headline figures translate The Sheltery's reach into the language of confidence, consistency, and meaningful client outcomes.
+          - generic:
+            - generic:
+              - generic: 0+
+              - heading "Units Sold" [level=3]
+              - paragraph: Curated residential opportunities closed with care and speed.
+            - generic:
+              - generic: 0+
+              - heading "Clients Served" [level=3]
+              - paragraph: Relationships built across Lagos, Nigeria, and the diaspora.
+            - generic:
+              - generic: ₦0B+
+              - heading "Value Transacted" [level=3]
+              - paragraph: Property volume moved through trusted advisory and negotiation.
+      - generic:
+        - generic:
+          - generic:
+            - generic: What Makes Us Tick
+            - heading "A service culture shaped by excellence, empathy, innovation, and integrity." [level=2]
+            - paragraph: The Sheltery's differentiator is not just access to inventory. It is the way people are guided, informed, and protected from first contact to final keys.
+          - generic:
+            - article:
+              - generic: "01"
+              - heading "Excellence" [level=3]
+              - paragraph: Every presentation, follow-up, inspection, and negotiation is handled with polish and precision.
+            - article:
+              - generic: "02"
+              - heading "Empathy" [level=3]
+              - paragraph: Property decisions are emotional decisions. We make room for clarity, patience, and genuine listening.
+            - article:
+              - generic: "03"
+              - heading "Innovation" [level=3]
+              - paragraph: From digital prospecting to smarter market positioning, we move with modern buyer behavior.
+            - article:
+              - generic: "04"
+              - heading "Integrity" [level=3]
+              - paragraph: No deal is worth the brand's reputation. Transparency and accountability stay non-negotiable.
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - generic: Success Stories
+              - heading "A founder-led brand with a voice clients remember." [level=2]
+              - generic:
+                - paragraph: Sheltery's story is tied closely to Azzizzat's rise as a visible, trusted Lagos real estate voice. The brand pairs on-ground expertise with education, media visibility, and practical support that keeps clients informed instead of overwhelmed.
+                - paragraph: That same energy carries into the channel and community around the business, where real estate insight, mentorship, and lived market experience reinforce the brand beyond transactions alone.
+              - link "Watch Our Channel":
+                - /url: https://www.youtube.com/@TheSheltery
+              - generic:
+                - img "Luxury real estate scene in Lagos"
+                - generic:
+                  - generic: Founder-Led Perspective
+                  - strong: Media, mentorship, and real market context.
+            - iframe [ref=e3]
+          - generic:
+            - article:
+              - generic: "01"
+              - paragraph: “Sheltery made the process feel secure from consultation to close, with updates that built real confidence at every step.”
+              - paragraph: Chinaza Okafor
+              - paragraph: Client
+            - article:
+              - generic: "02"
+              - paragraph: “Azzizzat combines professionalism, detail, and follow-through in a way that stands out immediately once the process starts moving.”
+              - paragraph: Mr Yinka Olotu
+              - paragraph: Client
+            - article:
+              - generic: "03"
+              - paragraph: “The brand's market insight and clarity make complex real estate questions feel practical, grounded, and easy to act on.”
+              - paragraph: Eugenia Nwanyanwuji
+              - paragraph: Realtor
+      - generic:
+        - generic:
+          - generic:
+            - generic: Join The Club
+            - heading "Get exclusive access to premium listings and market insights." [level=1]
+            - paragraph: Join our community of discerning property buyers and investors.
+            - generic:
+              - generic:
+                - generic: Email Address
+                - textbox "Email Address":
+                  - /placeholder: Enter your email
+              - button "Join Now"
+            - generic:
+              - generic:
+                - paragraph: Strategic property decisions backed by market insight.
+                - paragraph: Our investment advisory helps you identify high-potential opportunities across Lagos-prime locations, with due diligence, rental yield projections, and exit strategy planning.
+              - generic:
+                - paragraph: We don't just close deals. We curate confident moves.
+                - paragraph: — Azzizzat Oduwole, Founder
+      - generic:
+        - generic:
+          - generic:
+            - generic: Get In Touch
+            - heading "Tell us what you're looking for and we'll shape the next step with you." [level=2]
+            - paragraph: Whether you're buying, investing, relocating, or just looking for informed direction, The Sheltery responds with practical guidance and a tailored plan.
+          - generic:
+            - generic:
+              - generic: Phone
+              - link "+234 809 279 9692":
+                - /url: tel:+2348092799692
+            - generic:
+              - generic: Email
+              - link "hello@azzizzat.com":
+                - /url: mailto:hello@azzizzat.com
+            - generic:
+              - generic: Location
+              - generic: Lekki Peninsula II, Lagos, Nigeria
+          - generic:
+            - generic:
+              - generic:
+                - generic: Full Name
+                - textbox "Full Name":
+                  - /placeholder: Your name
+              - generic:
+                - generic: Email
+                - textbox "Email":
+                  - /placeholder: you@example.com
+              - generic:
+                - generic: Phone
+                - textbox "Phone":
+                  - /placeholder: +234...
+              - generic:
+                - generic: Message
+                - textbox "Message":
+                  - /placeholder: Tell us what you need.
+              - button "Send Inquiry"
+              - paragraph: The form opens your email client with the inquiry prefilled so you can send immediately.
+    - contentinfo:
+      - generic:
+        - generic:
+          - button "THE SHELTERY Lagos, Nigeria":
+            - generic: THE SHELTERY
+            - generic: Lagos, Nigeria
+          - link "+234 809 279 9692":
+            - /url: tel:+2348092799692
+        - navigation "Footer":
+          - button "Home"
+          - button "About"
+          - button "Vision"
+          - button "Contact"
+        - generic:
+          - paragraph: Lekki Peninsula II, Lagos, Nigeria
+          - link "hello@azzizzat.com":
+            - /url: mailto:hello@azzizzat.com
+          - generic:
+            - link "Instagram":
+              - /url: https://www.instagram.com/azzizzat/
+            - link "LinkedIn":
+              - /url: https://www.linkedin.com/in/azzizzat-oluwafunke-oduwole-429bb7156/
+            - link "YouTube":
+              - /url: https://www.youtube.com/@TheSheltery
+        - generic:
+          - paragraph: Copyright © 2026 The Sheltery. All rights reserved.
+          - paragraph: Designed for confident property decisions in Lagos.
+    - link "Chat with The Sheltery on WhatsApp":
+      - /url: https://wa.me/2348092799692
+      - img
+  - generic [ref=e4]:
+    - img [ref=e5]
+    - paragraph [ref=e11]: Unlock the next chapter of Lagos living.
+    - button "Skip Intro" [ref=e16] [cursor=pointer]

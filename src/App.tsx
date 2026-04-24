@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./styles/variables.css";
 import "./styles/reset.css";
 import "./styles/typography.css";
@@ -31,7 +31,51 @@ import { useStickyHeader } from "./hooks/useStickyHeader";
 
 function App() {
   const [showEntrance, setShowEntrance] = useState(true);
+  const [activeSection, setActiveSection] = useState("home");
   const isSticky = useStickyHeader(48);
+  const navTargets = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          ["home", ...headerContent.leftNav, ...headerContent.rightNav]
+            .map((item) => (typeof item === "string" ? item : item.target))
+            .filter((target): target is string => Boolean(target))
+        )
+      ),
+    []
+  );
+
+  useEffect(() => {
+    const sections = navTargets
+      .map((target) => document.getElementById(target))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    if (!sections.length) {
+      return;
+    }
+
+    // Use a centered observation band so the active nav state follows the content
+    // the user is actually reading, not the first section that barely touches the viewport.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible?.target.id) {
+          setActiveSection(visible.target.id);
+        }
+      },
+      {
+        rootMargin: "-38% 0px -42% 0px",
+        threshold: [0.2, 0.4, 0.6, 0.8]
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, [navTargets]);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
@@ -40,6 +84,7 @@ function App() {
       return;
     }
 
+    setActiveSection(sectionId);
     section.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -52,6 +97,7 @@ function App() {
       <div className={`site-shell ${showEntrance ? "site-shell--preload" : ""}`}>
         <Header
           content={headerContent}
+          activeSection={activeSection}
           isSticky={isSticky}
           onNavigate={scrollToSection}
         />

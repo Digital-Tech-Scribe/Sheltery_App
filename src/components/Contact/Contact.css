@@ -22,7 +22,7 @@
 
 .contact__details {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.3rem;
   margin-top: 0.5rem;
   padding-top: 1.6rem;
@@ -32,7 +32,7 @@
 .contact__details div {
   display: grid;
   gap: 0.3rem;
-  justify-items: center;
+  justify-items: start;
 }
 
 .contact__detail-label {
@@ -55,8 +55,8 @@
 
 .contact__form {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.3rem 2rem;
+  grid-template-columns: 1fr;
+  gap: 1.1rem;
 }
 
 .contact__field {
@@ -78,7 +78,8 @@
 .contact__field input,
 .contact__field textarea {
   width: 100%;
-  padding: 0.7rem 0 0.95rem;
+  min-height: var(--input-min-height);
+  padding: 0.85rem 0 1rem;
   border: 0;
   border-bottom: 1px solid rgba(220, 203, 179, 0.24);
   background: transparent;
@@ -92,6 +93,17 @@
   border-color: var(--c2);
 }
 
+.contact__field input[aria-invalid="true"],
+.contact__field textarea[aria-invalid="true"] {
+  border-color: #f0b7b0;
+}
+
+.contact__field-error {
+  color: #f0b7b0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
 .contact__feedback {
   grid-column: 1 / -1;
   color: var(--text-muted);
@@ -103,9 +115,23 @@
   color: #f0b7b0;
 }
 
-@media (max-width: 720px) {
-  .contact__details,
+@media (min-width: 48rem) {
+  .contact__details {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .contact__form {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.3rem 2rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  .contact__details {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .contact__details div {
+    justify-items: center;
   }
 }

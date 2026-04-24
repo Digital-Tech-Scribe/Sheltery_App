@@ -80,15 +80,19 @@ export function Hero({
             <h1 className="hero__title">{content.title}</h1>
             <p className="hero__subtitle">{content.subtitle}</p>
             <form className="hero__form" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                className="hero__input"
-                placeholder="Enter your email"
-                required
-              />
+              <label className="hero__field">
+                <span className="hero__field-label">Email Address</span>
+                <input
+                  type="email"
+                  className="hero__input"
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                  required
+                />
+              </label>
               <button
                 type="submit"
-                className="button-primary hero__submit"
+                className="button-solid hero__submit"
                 onClick={onPrimaryAction}
               >
                 {content.primaryCta}

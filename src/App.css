@@ -1,5 +1,6 @@
 .site-shell {
-  --site-container-width: min(1980px, calc(100vw - 2.4rem));
+  /* Keep wide screens centered and breathable instead of stretching edge to edge. */
+  --site-container-width: min(var(--site-max-width), calc(100vw - (var(--page-gutter) * 2)));
   position: relative;
   min-height: 100vh;
   overflow-x: clip;
@@ -53,7 +54,7 @@ main::before {
 .section-shell {
   position: relative;
   z-index: 1;
-  padding: clamp(4.4rem, 6.8vw, 6.8rem) 0;
+  padding: clamp(4rem, 6vw, 6.5rem) 0;
   border-top: 1px solid rgba(220, 203, 179, 0.08);
 }
 
@@ -85,7 +86,7 @@ main::before {
   align-items: center;
   gap: 0.6rem;
   color: var(--c2);
-  font-size: 0.7rem;
+  font-size: clamp(0.82rem, 0.78rem + 0.2vw, 0.9rem);
   letter-spacing: 0.22rem;
   text-transform: uppercase;
 }
@@ -101,14 +102,16 @@ main::before {
 
 .section-title {
   margin: 0;
-  font-size: clamp(2.9rem, 5vw, 4.8rem);
+  font-size: clamp(2.35rem, 6vw, 4.8rem);
+  line-height: 1.06;
   letter-spacing: -0.065em;
 }
 
 .section-copy {
   margin: 0;
   color: var(--text-muted);
-  font-size: 0.98rem;
+  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.08rem);
+  line-height: 1.7;
   max-width: 32rem;
 }
 
@@ -121,10 +124,12 @@ main::before {
   gap: 0.7rem;
   border: 1px solid transparent;
   border-radius: 0;
-  padding: 0.95rem 1.45rem;
-  font-size: 0.7rem;
+  min-height: var(--tap-target);
+  padding: 0.9rem 1.25rem;
+  font-size: clamp(0.88rem, 0.82rem + 0.12vw, 0.95rem);
   font-weight: 500;
-  letter-spacing: 0.2rem;
+  line-height: 1.2;
+  letter-spacing: 0.16rem;
   text-transform: uppercase;
   text-decoration: none;
   transition:
@@ -148,6 +153,12 @@ main::before {
   box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
 }
 
+.button-outline:active,
+.button-solid:active,
+.button-text:active {
+  transform: translateY(0);
+}
+
 .button-solid {
   color: var(--c1);
   background: rgba(220, 203, 179, 0.1);
@@ -166,7 +177,8 @@ main::before {
   color: var(--c2);
   background: none;
   justify-content: flex-start;
-  font-size: 0.68rem;
+  min-height: var(--tap-target);
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -187,7 +199,7 @@ main::before {
 }
 
 .section-grid--two {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   align-items: start;
 }
 
@@ -260,20 +272,35 @@ main::before {
   font-size: 0.9rem;
 }
 
-@media (max-width: 960px) {
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+input,
+textarea,
+select {
+  min-height: var(--input-min-height);
+}
+
+textarea {
+  min-height: 8.5rem;
+}
+
+@media (min-width: 48rem) {
   .section-grid--two {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 44.9375rem) {
   main::before {
     left: 1.1rem;
     opacity: 0.45;
   }
 
   .container {
-    width: min(100vw - 0.9rem, 100%);
+    width: min(100vw - (var(--page-gutter) * 2), 100%);
   }
 
   .button-outline,
@@ -288,5 +315,20 @@ main::before {
   .eyebrow::before,
   .eyebrow::after {
     width: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
