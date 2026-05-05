@@ -1,4 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Lenis from "lenis";
 import "./styles/variables.css";
 import "./styles/reset.css";
 import "./styles/typography.css";
@@ -32,6 +35,7 @@ import { useStickyHeader } from "./hooks/useStickyHeader";
 function App() {
   const [showEntrance, setShowEntrance] = useState(true);
   const [activeSection, setActiveSection] = useState("home");
+  const lenisRef = useRef<Lenis | null>(null);
   const isSticky = useStickyHeader(48);
   const navTargets = useMemo(
     () =>
@@ -44,6 +48,57 @@ function App() {
       ),
     []
   );
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    lenisRef.current = lenis;
+    const handleLenisScroll = () => ScrollTrigger.update();
+    const handleTicker = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    lenis.on("scroll", handleLenisScroll);
+    gsap.ticker.add(handleTicker);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      gsap.ticker.remove(handleTicker);
+      lenis.off("scroll", handleLenisScroll);
+      lenis.destroy();
+      lenisRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const lenis = lenisRef.current;
+
+    if (!lenis) {
+      return;
+    }
+
+    if (showEntrance) {
+      lenis.stop();
+      return;
+    }
+
+    lenis.start();
+
+    window.requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+  }, [showEntrance]);
 
   useEffect(() => {
     const sections = navTargets
@@ -85,7 +140,16 @@ function App() {
     }
 
     setActiveSection(sectionId);
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(`#${sectionId}`, {
+        offset: 0,
+        duration: 1.5,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const handleEntranceComplete = () => {

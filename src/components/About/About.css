@@ -123,3 +123,20 @@
     padding-bottom: 0;
   }
 }
+
+.about {
+  position: relative;
+}
+
+.about__line-left {
+  position: absolute;
+  top: 0;
+  left: clamp(1rem, 5vw, 4rem);
+  z-index: 1;
+}
+
+@media (max-width: 64rem) {
+  .about__line-left {
+    display: none;
+  }
+}

@@ -1,5 +1,5 @@
 import type { StoriesContent as StoriesContentType } from "../../types";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
+import { Reveal } from "../Reveal/Reveal";
 import "./SuccessStories.css";
 
 interface SuccessStoriesProps {
@@ -7,17 +7,12 @@ interface SuccessStoriesProps {
 }
 
 export function SuccessStories({ content }: SuccessStoriesProps) {
-  const copyReveal = useScrollReveal<HTMLDivElement>();
-  const mediaReveal = useScrollReveal<HTMLDivElement>();
 
   return (
     <section id="stories" className="section-shell stories">
       <div className="container">
         <div className="section-grid section-grid--two stories__grid">
-          <div
-            ref={copyReveal.ref}
-            className={`stories__copy reveal ${copyReveal.isVisible ? "is-visible" : ""}`}
-          >
+          <Reveal className="stories__copy" direction="up">
             <span className="eyebrow">{content.eyebrow}</span>
             <h2 className="section-title stories__title">{content.title}</h2>
             <div className="stories__body">
@@ -42,12 +37,9 @@ export function SuccessStories({ content }: SuccessStoriesProps) {
                 <strong>Media, mentorship, and real market context.</strong>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div
-            ref={mediaReveal.ref}
-            className={`stories__media reveal ${mediaReveal.isVisible ? "is-visible" : ""}`}
-          >
+          <Reveal className="stories__media" direction="up" delay={0.2}>
             <div className="media-frame stories__video-frame">
               <iframe
                 src={content.videoEmbedUrl}
@@ -58,10 +50,10 @@ export function SuccessStories({ content }: SuccessStoriesProps) {
                 referrerPolicy="strict-origin-when-cross-origin"
               />
             </div>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="stories__testimonials">
+        <Reveal className="stories__testimonials" direction="up" stagger={0.15}>
           {content.testimonials.map((testimonial, index) => (
             <article key={testimonial.author} className="stories__quote">
               <span className="stories__quote-index">0{index + 1}</span>
@@ -70,7 +62,7 @@ export function SuccessStories({ content }: SuccessStoriesProps) {
               <p className="stories__quote-role">{testimonial.role}</p>
             </article>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

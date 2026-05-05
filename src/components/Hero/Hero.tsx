@@ -1,4 +1,5 @@
 import type { HeroContent as HeroContentType } from "../../types";
+import { Reveal } from "../Reveal/Reveal";
 import "./Hero.css";
 
 interface HeroProps {
@@ -144,26 +145,32 @@ export function Hero({
       <div className="hero__veil" />
       <div className="container hero__content">
         <div className="hero__copy">
-          <h1 className="hero__title">
-            {titleLines.map((line) => (
-              <span key={line} className="hero__title-line">
-                {line}
-              </span>
-            ))}
-          </h1>
+          <Reveal direction="up" stagger={0.2}>
+            <h1 className="hero__title">
+              {titleLines.map((line) => (
+                <span key={line} className="hero__title-line">
+                  {line}
+                </span>
+              ))}
+            </h1>
+          </Reveal>
         </div>
 
         <div className="hero__meta">
-          <p className="hero__subtitle">{content.subtitle}</p>
-          <div className="hero__actions">
-            <button
-              className="hero__cta"
-              type="button"
-              onClick={onPrimaryAction}
-            >
-              {content.primaryCta}
-            </button>
-          </div>
+          <Reveal direction="up" delay={0.4}>
+            <p className="hero__subtitle">{content.subtitle}</p>
+          </Reveal>
+          <Reveal direction="up" delay={0.6}>
+            <div className="hero__actions">
+              <button
+                className="hero__cta"
+                type="button"
+                onClick={onPrimaryAction}
+              >
+                {content.primaryCta}
+              </button>
+            </div>
+          </Reveal>
         </div>
       </div>
 

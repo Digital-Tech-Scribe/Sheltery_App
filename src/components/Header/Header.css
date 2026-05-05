@@ -129,16 +129,11 @@
   inset: calc(var(--header-mobile-height) + 1rem) 0 auto 0;
   z-index: 9;
   pointer-events: none;
-  opacity: 0;
-  transform: translateY(-8px);
-  transition:
-    opacity var(--transition-standard),
-    transform var(--transition-standard);
+  visibility: hidden;
+  transform: translateX(100%);
 }
 
 .header__drawer--open {
-  opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
 

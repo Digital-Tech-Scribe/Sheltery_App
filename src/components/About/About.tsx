@@ -1,5 +1,6 @@
+import { Reveal } from "../Reveal/Reveal";
+import { ScrollLine } from "../ScrollLine/ScrollLine";
 import type { AboutContent as AboutContentType } from "../../types";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
 import "./About.css";
 
 interface AboutProps {
@@ -8,34 +9,28 @@ interface AboutProps {
 }
 
 export function About({ content, onCta }: AboutProps) {
-  const introReveal = useScrollReveal<HTMLDivElement>();
-  const mediaReveal = useScrollReveal<HTMLDivElement>();
-  const detailsReveal = useScrollReveal<HTMLDivElement>();
 
   return (
     <section id="about" className="section-shell about">
+      <ScrollLine 
+        className="about__line-left" 
+        thickness="1px" 
+        length="100%" 
+        color="rgba(220, 203, 179, 0.15)"
+      />
       <div className="container about__grid">
-        <div
-          ref={introReveal.ref}
-          className={`about__intro reveal ${introReveal.isVisible ? "is-visible" : ""}`}
-        >
+        <Reveal className="about__intro" direction="up">
           <span className="eyebrow">{content.eyebrow}</span>
           <h2 className="section-title about__title">{content.title}</h2>
-        </div>
+        </Reveal>
 
-        <div
-          ref={mediaReveal.ref}
-          className={`about__media reveal ${mediaReveal.isVisible ? "is-visible" : ""}`}
-        >
+        <Reveal className="about__media" direction="up" delay={0.2}>
           <div className="media-frame about__frame">
             <img src={content.image} alt="The Sheltery founder portrait" />
           </div>
-        </div>
+        </Reveal>
 
-        <div
-          ref={detailsReveal.ref}
-          className={`about__details reveal ${detailsReveal.isVisible ? "is-visible" : ""}`}
-        >
+        <Reveal className="about__details" direction="up" delay={0.4}>
           <div className="about__body">
             {content.paragraphs.map((paragraph) => (
               <p key={paragraph} className="section-copy">
@@ -54,7 +49,7 @@ export function About({ content, onCta }: AboutProps) {
           <button className="button-outline about__cta" type="button" onClick={onCta}>
             {content.ctaLabel}
           </button>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

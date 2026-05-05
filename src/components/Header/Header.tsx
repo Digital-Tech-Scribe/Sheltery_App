@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
 import type { HeaderContent as HeaderContentType, NavItem } from "../../types";
 import "./Header.css";
 
@@ -56,10 +57,46 @@ function NavLink({
 
 export function Header({ content, activeSection, isSticky, onNavigate }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
   const mobileNav = [...content.leftNav, ...content.rightNav];
 
   useEffect(() => {
-    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    const ctx = gsap.context(() => {
+      tl.current = gsap.timeline({ paused: true });
+
+      tl.current
+        .to(drawerRef.current, {
+          autoAlpha: 1,
+          x: 0,
+          duration: 0.6,
+          ease: "power4.out",
+        })
+        .from(
+          linksRef.current?.children || [],
+          {
+            x: 50,
+            opacity: 0,
+            duration: 0.5,
+            stagger: 0.05,
+            ease: "power3.out",
+          },
+          "-=0.4"
+        );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      tl.current?.play();
+      document.body.style.overflow = "hidden";
+    } else {
+      tl.current?.reverse();
+      document.body.style.overflow = "";
+    }
 
     return () => {
       document.body.style.overflow = "";
@@ -135,9 +172,12 @@ export function Header({ content, activeSection, isSticky, onNavigate }: HeaderP
         </div>
       </div>
 
-      <div className={`header__drawer ${isMenuOpen ? "header__drawer--open" : ""}`}>
+      <div 
+        ref={drawerRef}
+        className={`header__drawer ${isMenuOpen ? "header__drawer--open" : ""}`}
+      >
         <div className="container header__drawer-inner">
-          <div className="header__drawer-links">
+          <div ref={linksRef} className="header__drawer-links">
             {mobileNav.map((item) => (
               <NavLink
                 key={item.label}

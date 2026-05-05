@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { VisionContent as VisionContentType } from "../../types";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
+import { Reveal } from "../Reveal/Reveal";
 import "./Vision.css";
 
 interface VisionProps {
@@ -8,7 +8,6 @@ interface VisionProps {
 }
 
 export function Vision({ content }: VisionProps) {
-  const reveal = useScrollReveal<HTMLDivElement>();
   const innerRef = useRef<HTMLDivElement | null>(null);
   const statementLines = content.statement.split("\n");
 
@@ -61,10 +60,7 @@ export function Vision({ content }: VisionProps) {
 
   return (
     <section id="vision" className="section-shell vision">
-      <div
-        ref={reveal.ref}
-        className={`container vision__inner reveal ${reveal.isVisible ? "is-visible" : ""}`}
-      >
+      <Reveal className="container vision__inner" direction="up">
         <div ref={innerRef} className="vision__canvas">
           <div className="vision__content">
             <span className="eyebrow vision__eyebrow">{content.eyebrow}</span>
@@ -86,7 +82,7 @@ export function Vision({ content }: VisionProps) {
             </p>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

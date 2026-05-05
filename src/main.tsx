@@ -7,7 +7,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
   </React.StrictMode>
 );
-
-window.requestAnimationFrame(() => {
-  document.body.classList.add("app-hydrated");
-});
