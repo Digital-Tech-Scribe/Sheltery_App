@@ -535,6 +535,9 @@
 
 @media (max-width: 48rem) {
   .hero--home .hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: min(100%, calc(100vw - 1.25rem));
     padding-top: 7rem;
     padding-bottom: 6rem;
@@ -556,8 +559,13 @@
   }
 
   .hero--home .hero__title {
-    font-size: clamp(3.9rem, 15vw, 5.6rem);
-    line-height: 0.84;
+    font-size: clamp(3.2rem, 13vw, 4.15rem);
+    line-height: 0.92;
+  }
+
+  .hero--home .hero__title-line {
+    max-width: 8.8ch;
+    white-space: normal;
   }
 
   .hero--home .hero__subtitle {
@@ -599,5 +607,15 @@
   .hero--join .hero__title {
     max-width: 100%;
     font-size: clamp(2.65rem, 9.5vw, 4rem);
+  }
+}
+
+@media (max-width: 24rem) {
+  .hero--home .hero__title {
+    font-size: 3rem;
+  }
+
+  .hero--home .hero__subtitle {
+    max-width: 14rem;
   }
 }

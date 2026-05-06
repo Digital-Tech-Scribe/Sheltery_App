@@ -120,30 +120,7 @@
   border-left: 0;
 }
 
-.entrance__skip {
-  position: absolute;
-  right: clamp(1.1rem, 3vw, 2rem);
-  bottom: clamp(1.1rem, 3vw, 2rem);
-  z-index: 3;
-  border: 1px solid rgba(220, 203, 179, 0.18);
-  padding: 0.82rem 1.02rem;
-  background: rgba(7, 13, 11, 0.08);
-  color: rgba(242, 241, 237, 0.6);
-  font-size: 0.58rem;
-  letter-spacing: 0.22rem;
-  text-transform: uppercase;
-  transition:
-    border-color var(--transition-standard),
-    background-color var(--transition-standard),
-    color var(--transition-standard);
-  cursor: pointer;
-}
 
-.entrance__skip:hover {
-  border-color: rgba(220, 203, 179, 0.48);
-  background: rgba(220, 203, 179, 0.06);
-  color: rgba(242, 241, 237, 1);
-}
 
 @media (max-width: 720px) {
   .entrance__caption {
@@ -151,9 +128,5 @@
     letter-spacing: 0.18rem;
   }
 
-  .entrance__skip {
-    right: 50%;
-    bottom: 1.5rem;
-    transform: translateX(50%);
-  }
+
 }

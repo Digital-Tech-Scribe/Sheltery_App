@@ -84,7 +84,7 @@ export function Entrance({ backgroundImage, onComplete }: EntranceProps) {
 
   const metaOpacity =
     1 - easeInCubic(clamp((progress - 0.68) / 0.18, 0, 1));
-  const skipOpacity = lerp(0.18, 0.82, clamp((progress - 0.14) / 0.22, 0, 1));
+
   const primaryZoom = easeInOutCubic(clamp(progress / 0.82, 0, 1));
   const finalBurst = easeInCubic(clamp((progress - 0.82) / 0.18, 0, 1));
   const maskScale =
@@ -134,13 +134,7 @@ export function Entrance({ backgroundImage, onComplete }: EntranceProps) {
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
 
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "Enter" || event.key === " " || event.key === "Escape") {
-        completeEntrance();
-      }
-    };
 
-    window.addEventListener("keydown", handleKeyPress);
 
     let startTime = 0;
 
@@ -180,7 +174,7 @@ export function Entrance({ backgroundImage, onComplete }: EntranceProps) {
 
       document.documentElement.style.overflow = previousHtmlOverflow;
       document.body.style.overflow = previousBodyOverflow;
-      window.removeEventListener("keydown", handleKeyPress);
+
     };
   }, [onComplete]);
 
@@ -261,14 +255,7 @@ export function Entrance({ backgroundImage, onComplete }: EntranceProps) {
         </span>
       </div>
 
-      <button
-        type="button"
-        className="entrance__skip"
-        onClick={completeEntrance}
-        style={{ opacity: skipOpacity }}
-      >
-        Skip Intro
-      </button>
+
     </div>
   );
 }

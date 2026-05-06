@@ -31,3 +31,18 @@
 .whatsapp-widget span {
   display: none;
 }
+
+@media (max-width: 47.9375rem) {
+  .whatsapp-widget {
+    right: 0.9rem;
+    bottom: 0.9rem;
+    width: 3rem;
+    height: 3rem;
+    opacity: 0.82;
+  }
+
+  .whatsapp-widget:focus-visible,
+  .whatsapp-widget:hover {
+    opacity: 1;
+  }
+}

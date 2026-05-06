@@ -33,13 +33,19 @@ export function Reveal({
     const element = elementRef.current;
     if (!element) return;
 
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion) {
+      onReveal?.();
+      return;
+    }
+
     const x = direction === "left" ? distance : direction === "right" ? -distance : 0;
     const y = direction === "up" ? distance : direction === "down" ? -distance : 0;
 
     const ctx = gsap.context(() => {
-      // Find all direct children or elements with a specific class if needed
-      // For now, we'll animate the container's children if there are multiple, 
-      // or the container itself if it's meant to be a single unit.
       const targets = element.children.length > 0 ? Array.from(element.children) : [element];
 
       gsap.from(targets, {

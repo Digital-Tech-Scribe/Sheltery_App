@@ -142,8 +142,11 @@ function App() {
     setActiveSection(sectionId);
     
     if (lenisRef.current) {
+      const headerHeight =
+        document.querySelector<HTMLElement>(".header")?.offsetHeight ?? 0;
+
       lenisRef.current.scrollTo(`#${sectionId}`, {
-        offset: 0,
+        offset: -(headerHeight + 16),
         duration: 1.5,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       });

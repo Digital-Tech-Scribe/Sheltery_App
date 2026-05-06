@@ -103,6 +103,24 @@ export function Header({ content, activeSection, isSticky, onNavigate }: HeaderP
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      return;
+    }
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => {
+      window.removeEventListener("keydown", handleEscape);
+    };
+  }, [isMenuOpen]);
+
   return (
     <header className={`header ${isSticky ? "header--sticky" : ""}`}>
       <div className="container header__inner">
@@ -163,6 +181,7 @@ export function Header({ content, activeSection, isSticky, onNavigate }: HeaderP
             className={`header__toggle ${isMenuOpen ? "header__toggle--open" : ""}`}
             type="button"
             aria-expanded={isMenuOpen}
+            aria-controls="site-mobile-navigation"
             aria-label="Toggle navigation"
             onClick={() => setIsMenuOpen((current) => !current)}
           >
@@ -173,6 +192,7 @@ export function Header({ content, activeSection, isSticky, onNavigate }: HeaderP
       </div>
 
       <div 
+        id="site-mobile-navigation"
         ref={drawerRef}
         className={`header__drawer ${isMenuOpen ? "header__drawer--open" : ""}`}
       >

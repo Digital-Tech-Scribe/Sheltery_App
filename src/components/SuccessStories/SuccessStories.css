@@ -75,7 +75,7 @@
 .stories__video-frame {
   width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: clamp(22rem, 34vw, 34rem);
+  min-height: 0;
   overflow: hidden;
   background: rgba(6, 13, 11, 0.92);
 }
@@ -160,7 +160,7 @@
   }
 
   .stories__video-frame {
-    min-height: 20rem;
+    min-height: 0;
   }
 
   .stories__thumbnail {

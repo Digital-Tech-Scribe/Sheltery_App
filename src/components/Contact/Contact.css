@@ -57,6 +57,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.1rem;
+  padding-bottom: 4.5rem;
 }
 
 .contact__field {
@@ -98,10 +99,12 @@
   border-color: #f0b7b0;
 }
 
-.contact__field-error {
+.contact__field .contact__field-error {
   color: #f0b7b0;
   font-size: 0.9rem;
   line-height: 1.5;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .contact__feedback {
@@ -116,6 +119,10 @@
 }
 
 @media (min-width: 48rem) {
+  .contact__form {
+    padding-bottom: 0;
+  }
+
   .contact__details {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -133,5 +140,12 @@
 
   .contact__details div {
     justify-items: center;
+  }
+}
+
+@media (max-width: 47.9375rem) {
+  .contact__details a,
+  .contact__details span:last-child {
+    overflow-wrap: anywhere;
   }
 }

@@ -57,6 +57,9 @@
 .footer__nav button,
 .footer__socials a,
 .footer__meta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-target);
   color: var(--text-soft);
   text-decoration: none;
   transition: color var(--transition-standard);
