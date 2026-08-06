@@ -1,25 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Nanum+Myeongjo:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Nanum+Myeongjo:wght@400&display=swap");
 
 html {
-  font-size: 100%;
-}
-
-body {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--c1);
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  line-height: 1.08;
-  font-weight: 400;
-}
-
-p {
-  line-height: 1.7;
+  font-size: 0.052vw;
 }

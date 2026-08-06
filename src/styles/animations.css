@@ -1,36 +1,56 @@
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-
-  50% {
-    transform: translate3d(0, -10px, 0);
-  }
-}
-
-@keyframes pulseRing {
-  0% {
-    transform: scale(0.7);
-    opacity: 0.7;
-  }
-
-  100% {
-    transform: scale(1.4);
-    opacity: 0;
-  }
-}
-
+/* Scroll-triggered text reveal */
 .reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition:
-    opacity 850ms ease,
-    transform 850ms ease;
-  transition-delay: var(--reveal-delay, 0ms);
+  padding: 1px 0;
 }
 
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal.holder {
+  padding: 1px var(--p1);
+}
+
+.text-wrap {
+  overflow: hidden;
+  padding: 15px 0;
+  margin: -15px 0;
+}
+
+.text-inner {
+  transition: transform 0.8s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  transform: translateY(calc(100% + 20px));
+}
+
+.reveal.animate .text-inner {
+  transform: translateY(0%);
+}
+
+/* Key icon reveal */
+.key-wrap {
+  overflow: hidden;
+  margin: 0 0 49rem;
+}
+
+.key {
+  display: block;
+  width: 82rem;
+  height: 27rem;
+  background: var(--key-svg) 50% 50% no-repeat;
+  background-size: contain;
+}
+
+.reveal .key {
+  transition: transform 0.8s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+  transform: translateY(calc(100% + 20px));
+}
+
+.reveal.animate .key {
+  transform: translateY(0%);
+}
+
+/* Image float parallax base */
+.img-float {
+  overflow: hidden;
+}
+
+.img-float img {
+  height: 120%;
+  object-fit: cover;
 }

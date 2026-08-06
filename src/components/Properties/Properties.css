@@ -1,0 +1,106 @@
+.properties {
+  position: relative;
+  padding: 0 0 210rem;
+}
+
+.properties-heading {
+  max-width: 900rem;
+  margin: 0 auto 72rem;
+}
+
+.properties-kicker {
+  margin: 0 0 18rem;
+  color: var(--c2);
+  font-size: max(12px, 14rem);
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.properties-heading h2 { text-align: left; }
+.properties-heading h2 .text-wrap { display: block; }
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rem;
+}
+
+.property-category-card {
+  position: relative;
+  display: block;
+  min-height: 390rem;
+  overflow: hidden;
+  color: var(--c1);
+  text-decoration: none;
+  background: var(--c4);
+}
+
+.property-category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .64;
+  transition: transform .8s var(--ease-out-expo), opacity .6s ease;
+}
+
+.property-category-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(79, 2, 39, .08), rgba(27, 0, 12, .92));
+}
+
+.property-category-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 34rem;
+}
+
+.property-category-label {
+  margin-bottom: 10rem;
+  color: var(--c2);
+  font-size: max(11px, 13rem);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.property-category-title {
+  font-family: 'NanumMyeongjo';
+  font-size: max(34px, 54rem);
+  line-height: 100%;
+}
+
+.property-category-detail {
+  max-width: 280rem;
+  margin-top: 12rem;
+  font-size: max(14px, 16rem);
+  opacity: .78;
+}
+
+.property-category-arrow {
+  position: absolute;
+  top: 30rem;
+  right: 34rem;
+  color: var(--c2);
+  font-size: max(24px, 30rem);
+  transition: transform .4s var(--ease-out-expo);
+}
+
+.property-category-card:focus-visible { outline: 2px solid var(--c2); outline-offset: 4px; }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .property-category-card:hover img { transform: scale(1.045); opacity: .84; }
+  .property-category-card:hover .property-category-arrow { transform: translate(5px, -5px); }
+}
+
+@media screen and (max-width: 1023px) {
+  .properties { padding-bottom: 92px; }
+  .properties-heading { margin: 0 auto 32px; }
+  .properties-grid { grid-template-columns: 1fr; gap: 12px; }
+  .property-category-card { min-height: 300px; }
+  .property-category-content { padding: 26px; }
+  .property-category-arrow { top: 24px; right: 26px; }
+}

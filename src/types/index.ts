@@ -22,6 +22,7 @@ export interface HeroContent {
   primaryCta?: string;
   secondaryCta?: string;
   backgroundImage?: string;
+  slides?: string[];
   highlights?: string[];
   floatingCardTitle?: string;
   floatingCardCopy?: string;
@@ -40,56 +41,6 @@ export interface AboutContent {
     value: string;
     label: string;
   }>;
-}
-
-export interface VisionContent {
-  eyebrow: string;
-  statement: string;
-}
-
-export interface StatItem {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  label: string;
-  description: string;
-}
-
-export interface StatsContent {
-  eyebrow: string;
-  title: string;
-  copy: string;
-  items: StatItem[];
-}
-
-export interface ValueItem {
-  title: string;
-  description: string;
-}
-
-export interface ValuesContent {
-  eyebrow: string;
-  title: string;
-  copy: string;
-  items: ValueItem[];
-}
-
-export interface Testimonial {
-  quote: string;
-  author: string;
-  role: string;
-}
-
-export interface StoriesContent {
-  eyebrow: string;
-  title: string;
-  paragraphs: string[];
-  ctaLabel: string;
-  ctaHref: string;
-  videoEmbedUrl: string;
-  videoTitle: string;
-  posterImage: string;
-  testimonials: Testimonial[];
 }
 
 export interface ContactContent {
@@ -118,4 +69,42 @@ export interface FooterContent {
   phoneHref: string;
   email: string;
   channelHref: string;
+}
+
+export type PropertyCategory = "sales" | "rent" | "shortlet" | "joint-venture";
+
+export interface PricingTable {
+  title: string;
+  status?: string;
+  items: { size: string; price: string }[];
+  paymentPlan?: string;
+}
+
+export interface PropertyListing {
+  id: string;
+  slug: string;
+  category: PropertyCategory;
+  name: string;
+  propertyType: string;
+  location: string;
+  status: string;
+  title: string;
+  priceRange?: string;
+  currency: "NGN" | "USD" | "GBP";
+  heroImage: string;
+  galleryImages: string[];
+  videoUrl?: string;
+  summary: string;
+  description: string;
+  propertyOverview: {
+    propertyName: string;
+    propertySize?: string;
+    category: string;
+    deliveryDate?: string;
+    constructionStatus?: string;
+  };
+  pricingTables: PricingTable[];
+  features: string[];
+  paymentPlan?: string;
+  whatsappLink?: string;
 }

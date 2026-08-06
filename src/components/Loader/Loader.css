@@ -1,0 +1,174 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--c4);
+  opacity: 1;
+  transition: opacity 350ms ease;
+}
+
+.loader::before,
+.loader::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+
+.loader::before {
+  background: var(--hero-img, url('/assets/hero-lagos.jpg')) 50% 48% no-repeat;
+  background-size: cover;
+  transform: scale(1.01);
+}
+
+.loader::after {
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(20, 20, 20, 0.32), rgba(20, 20, 20, 0.04) 62%),
+    linear-gradient(180deg, rgba(79, 2, 39, 0.5), rgba(79, 2, 39, 0.78));
+}
+
+.loader-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: var(--key-bg-img, url('/assets/key-bg.svg')) 50% 50% no-repeat;
+  background-size: 100% 100%;
+  transform: scale(1.02);
+  transform-origin: 50% 50%;
+  will-change: transform;
+  transition: transform 1450ms cubic-bezier(0.65, 0, 0.35, 1) 250ms;
+}
+
+.loader.animate .loader-bg {
+  transform: scale(26);
+}
+
+.loader.exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-box {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(64px, 11vh, 120px);
+  z-index: 3;
+  width: min(88vw, 520px);
+  color: var(--c5);
+  text-align: center;
+  font-size: clamp(12px, 0.9vw, 15px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  transition: opacity 400ms ease, transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.loader-logo {
+  display: block;
+  width: clamp(108px, 8vw, 145px);
+  height: auto;
+  margin: 0 auto 24px;
+  filter: brightness(0) invert(92%) sepia(12%) saturate(410%) hue-rotate(331deg)
+    brightness(105%);
+}
+
+.loader-key-wrap {
+  overflow: hidden;
+  margin: 30px 0 0;
+}
+
+.loader-key {
+  width: 82px;
+  height: 27px;
+  margin: 0 auto;
+  background: var(--key-img, url('/assets/key.svg')) 50% 50% no-repeat;
+  background-size: contain;
+  transition: opacity 350ms ease, transform 450ms cubic-bezier(0.55, 0, 1, 0.45);
+}
+
+.line {
+  overflow: hidden;
+}
+
+.line-inner {
+  transition: opacity 350ms ease, transform 450ms cubic-bezier(0.55, 0, 1, 0.45);
+}
+
+.loader.animate .line-inner,
+.loader.animate .loader-key {
+  opacity: 0;
+  transform: translateY(110%);
+}
+
+.loader.animate .loader-box {
+  opacity: 0;
+  transform: translate(-50%, 12px);
+}
+
+@media screen and (max-width: 1023px) {
+  .loader-box {
+    bottom: max(48px, calc(env(safe-area-inset-bottom) + 32px));
+  }
+
+  .loader-key-wrap {
+    margin-top: 22px;
+  }
+
+  .loader-logo {
+    width: 108px;
+    margin-bottom: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .loader::before {
+    background-position: 62% 50%;
+  }
+
+  .loader-bg {
+    background-size: auto 100%;
+  }
+
+  .loader.animate .loader-bg {
+    transform: scale(18);
+  }
+
+  .loader-box {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+  }
+
+  .loader-key {
+    width: 66px;
+    height: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader {
+    transition-duration: 250ms;
+  }
+
+  .loader-bg {
+    transition: opacity 180ms ease;
+  }
+
+  .loader.animate .loader-bg {
+    opacity: 0;
+    transform: none;
+  }
+
+  .loader-box,
+  .line-inner,
+  .loader-key {
+    transition-duration: 150ms;
+  }
+}

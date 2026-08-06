@@ -1,55 +1,51 @@
-*,
-*::before,
-*::after {
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: var(--c4);
+}
+
+body {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  color: var(--c1);
+  font-size: var(--body);
+  font-weight: 300;
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
+  line-height: 130%;
+  min-width: 320px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4, p, ul, li, a, span, div, input, textarea, select, form, fieldset, button, dl, dd, dt, figure, figcaption, blockquote, caption, aside, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
   box-sizing: border-box;
 }
 
-html,
-body,
-#root {
+img {
   margin: 0;
-  min-height: 100%;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-dl,
-dd {
-  margin: 0;
-}
-
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
   padding: 0;
+  border-style: none;
+  vertical-align: bottom;
+}
+
+input, textarea, select, button {
+  font-weight: 400;
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
+  vertical-align: middle;
   border: 0;
+  outline: 0;
   background: none;
 }
 
-ul,
-ol {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+a:hover { text-decoration: none; }
+
+ul li { list-style: none; }
