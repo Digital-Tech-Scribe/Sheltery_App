@@ -1,88 +1,91 @@
-# DETAILED PLAN: PINNED SCROLL-DRIVEN SLOGAN ANIMATION REPAIR
+# DETAILED REFINED PLAN: LIQUID CHARACTER TEXT FILL & OVERLAPPING SCROLL ANIMATION
 
-> **Overview**: This document presents a comprehensive technical plan to fix the slogan scroll animation in **The Sheltery** web application, based on the comparative analysis of `Currently.mp4` and `How_it_should_animate.mp4`.
-
----
-
-## 1. Frame-by-Frame Video Analysis & Findings
-
-### Defect Analysis (`Currently.mp4`)
-In the current implementation:
-1. **Unpinned Page Flow**: The `<Slogan />` component scrolls up the page naturally as the user scrolls. Because the section is not pinned to the viewport (`pin: true` is missing in GSAP ScrollTrigger), the user scrolls right past the section before the text reveal completes.
-2. **Width-Clipping Artefacts**: In `Slogan.tsx`, the code overlays a duplicate text string (`<span className="slogan-cover">`) positioned absolutely over the text line and animates its `width` from `0%` to `100%`. When text breaks onto multiple lines on responsive viewports, animating container width clips letters in half horizontally across wrapped lines, creating layout glitches.
-
-### Target Reference Analysis (`How_it_should_animate.mp4`)
-In the reference demonstration video:
-1. **Sticky Viewport Pinning**: As soon as the slogan section scrolls into view (centered vertically in the viewport), GSAP `ScrollTrigger` pins the section (`pin: true`). The section stays locked in place while the rest of the page remains still.
-2. **Scroll-Driven Word Stagger Reveal**: As the user scrolls down, the scroll progress directly controls a word-by-word (or character-by-character) reveal animation.
-3. **Typography Color Transition**: Words start in a dark/muted color (`rgba(242, 241, 237, 0.15)`) against the wine background, and smoothly shift to 100% full-opacity white (`#FFFFFF` / `var(--c1)`) as scroll advances.
-4. **Smooth Pin Release**: Once all words reach 100% opacity, the section unpins cleanly, allowing the user to continue scrolling into the `<Properties />` section below.
+> **Overview**: Based on the latest reference recording (`Screen Recording 2026-08-13 at 9.21.53 AM.mov`), this document outlines the exact technical implementation required to replicate the fluid "pouring water" character text fill and the smooth section overlap on **The Sheltery** website.
 
 ---
 
-## 2. Technical Architecture & Proposed Refactoring
+## 1. Refined Reference Video Analysis
 
-### A. Component Refactoring (`src/components/Slogan/Slogan.tsx`)
+### Key Design Observations
+1. **Liquid Character Fill ("Water Pouring Effect")**:
+   - As the user scrolls, white text fills the paragraph smoothly from top-left to bottom-right across lines.
+   - The fill effect operates at the character level (`SLOGAN_TEXT.split("")`) using a linear stagger curve (`stagger: { amount: 1, ease: "none" }`).
+   - Muted base text (`rgba(242, 241, 237, 0.15)`) transitions smoothly into bright white (`#FFFFFF`).
 
-#### DOM Restructuring
-Replace duplicate overlapping spans with a clean word-wrapped array structure:
+2. **Section Stacking & Content Overlap**:
+   - The slogan section remains pinned while the user scrolls through the text reveal.
+   - As the reveal completes, the following section (`<Properties />`) slides UP over top of the pinned slogan section.
+   - The slogan section container acts as a fixed backdrop while subsequent page content flows over it.
+
+---
+
+## 2. Technical Architecture
+
+### Component Code (`src/components/Slogan/Slogan.tsx`)
 ```tsx
-const SLOGAN_TEXT = "The Sheltery's business model is simple: Get into the real estate market near its low point and get out before an economic downturn.";
-const words = SLOGAN_TEXT.split(" ");
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./Slogan.css";
 
-return (
-  <section className="slogan-section" ref={sectionRef}>
-    <div className="slogan-container">
-      <p className="slogan-text">
-        {words.map((word, index) => (
-          <span key={index} className="slogan-word">
-            {word}{" "}
-          </span>
-        ))}
-      </p>
-    </div>
-  </section>
-);
+const SLOGAN_TEXT =
+  "The Sheltery's business model is simple: Get into the real estate market near its low point and get out before an economic downturn.";
+
+export function Slogan() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const chars = SLOGAN_TEXT.split("");
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const charElements = sectionRef.current?.querySelectorAll(".slogan-char");
+      if (!charElements || charElements.length === 0) return;
+
+      gsap.set(charElements, { color: "rgba(242, 241, 237, 0.15)" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=150%",
+          pin: true,
+          scrub: 0.3,
+          anticipatePin: 1,
+        },
+      });
+
+      // Liquid character fill curve
+      tl.to(charElements, {
+        color: "#FFFFFF",
+        stagger: {
+          amount: 1,
+          ease: "none",
+        },
+        ease: "none",
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section className="slogan-section" ref={sectionRef}>
+      <div className="slogan-container">
+        <p className="slogan-text">
+          {chars.map((char, index) => (
+            <span key={index} className="slogan-char">
+              {char}
+            </span>
+          ))}
+        </p>
+      </div>
+    </section>
+  );
+}
 ```
 
-#### GSAP ScrollTrigger Configuration
-- Register `ScrollTrigger`.
-- Set initial state of all `.slogan-word` elements: `color: "rgba(242, 241, 237, 0.15)"` (muted).
-- Create a GSAP timeline with viewport pinning and scroll scrubbing:
-```typescript
-useEffect(() => {
-  gsap.registerPlugin(ScrollTrigger);
-  
-  const ctx = gsap.context(() => {
-    const wordElements = sectionRef.current?.querySelectorAll(".slogan-word");
-    if (!wordElements || wordElements.length === 0) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=150%", // Pins for 1.5x viewport height scroll distance
-        pin: true,
-        scrub: 0.5,
-        anticipatePin: 1,
-      },
-    });
-
-    tl.to(wordElements, {
-      color: "#ffffff",
-      stagger: 0.1,
-      ease: "power1.inOut",
-    });
-  });
-
-  return () => ctx.revert();
-}, []);
-```
-
----
-
-### B. Stylesheet Updates (`src/components/Slogan/Slogan.css`)
-
+### Stylesheet (`src/components/Slogan/Slogan.css`)
 ```css
 .slogan-section {
   width: 100%;
@@ -90,9 +93,9 @@ useEffect(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--c4);
   position: relative;
-  overflow: hidden;
+  background: var(--c4);
+  z-index: 1;
 }
 
 .slogan-container {
@@ -103,39 +106,28 @@ useEffect(() => {
 }
 
 .slogan-text {
+  text-align: center;
   font-family: 'NanumMyeongjo', serif;
   font-size: var(--high);
   font-weight: 400;
   line-height: 125%;
-  letter-spacing: -2rem;
+  letter-spacing: -2.88rem;
   margin: 0;
 }
 
-.slogan-word {
-  display: inline-block;
+.slogan-char {
+  display: inline;
   color: rgba(242, 241, 237, 0.15);
-  transition: color 0.1s ease;
-  white-space: pre;
-}
-
-@media screen and (max-width: 1023px) {
-  .slogan-container {
-    padding: 0 24px;
-  }
-  .slogan-text {
-    line-height: 135%;
-    letter-spacing: -0.96px;
-  }
+  transition: color 0.1s ease-out;
+  white-space: pre-wrap;
 }
 ```
 
 ---
 
-## 3. Step-by-Step Execution Checklist
+## 3. Implementation Steps
 
-- [ ] **Step 1**: Refactor `src/components/Slogan/Slogan.tsx` DOM to render mapped `.slogan-word` spans.
-- [ ] **Step 2**: Configure GSAP `ScrollTrigger` timeline with `pin: true`, `start: "top top"`, `end: "+=150%"`, and `scrub: 0.5`.
-- [ ] **Step 3**: Update `src/components/Slogan/Slogan.css` with `min-height: 100vh` flex layout and inline word span styling.
-- [ ] **Step 4**: Test production build (`npm run build`).
-- [ ] **Step 5**: Verify smooth pinning and word-by-word reveal in browser.
-- [ ] **Step 6**: Commit and push to GitHub repository (`main` branch).
+- [ ] **Step 1**: Refactor `Slogan.tsx` to map character spans (`SLOGAN_TEXT.split("")`).
+- [ ] **Step 2**: Update GSAP ScrollTrigger timeline to scrub character stagger (`stagger: { amount: 1, ease: "none" }`).
+- [ ] **Step 3**: Configure section z-index ordering so subsequent content (`<Properties />`) overlaps the slogan section smoothly on scroll exit.
+- [ ] **Step 4**: Verify build (`npm run build`).

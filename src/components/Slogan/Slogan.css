@@ -6,7 +6,8 @@
   justify-content: center;
   position: relative;
   background: var(--c4);
-  margin: 0 0 40rem;
+  z-index: 1;
+  margin: 0;
 }
 
 .slogan-container {
@@ -26,17 +27,17 @@
   margin: 0;
 }
 
-.slogan-word {
-  display: inline-block;
+.slogan-char {
+  display: inline;
   color: rgba(242, 241, 237, 0.15);
-  transition: color 0.15s ease-out;
+  transition: color 0.08s ease-out;
   white-space: pre-wrap;
+  will-change: color;
 }
 
 @media screen and (max-width: 1023px) {
   .slogan-section {
-    min-height: 75vh;
-    margin-bottom: 24px;
+    min-height: 80vh;
   }
 
   .slogan-container {

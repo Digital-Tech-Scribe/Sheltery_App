@@ -8,32 +8,35 @@ const SLOGAN_TEXT =
 
 export function Slogan() {
   const sectionRef = useRef<HTMLElement>(null);
-  const words = SLOGAN_TEXT.split(" ");
+  const chars = SLOGAN_TEXT.split("");
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const wordElements = sectionRef.current?.querySelectorAll(".slogan-word");
-      if (!wordElements || wordElements.length === 0) return;
+      const charElements = sectionRef.current?.querySelectorAll(".slogan-char");
+      if (!charElements || charElements.length === 0) return;
 
-      gsap.set(wordElements, { color: "rgba(242, 241, 237, 0.15)" });
+      gsap.set(charElements, { color: "rgba(242, 241, 237, 0.15)" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: "+=120%",
+          end: "+=140%",
           pin: true,
-          scrub: 0.5,
+          scrub: 0.3,
           anticipatePin: 1,
         },
       });
 
-      tl.to(wordElements, {
+      tl.to(charElements, {
         color: "#FFFFFF",
-        stagger: 0.1,
-        ease: "power1.inOut",
+        stagger: {
+          amount: 1,
+          ease: "none",
+        },
+        ease: "none",
       });
     }, sectionRef);
 
@@ -44,9 +47,9 @@ export function Slogan() {
     <section className="slogan-section" ref={sectionRef}>
       <div className="slogan-container">
         <p className="slogan-text">
-          {words.map((word, index) => (
-            <span key={`${word}-${index}`} className="slogan-word">
-              {word}{" "}
+          {chars.map((char, index) => (
+            <span key={index} className="slogan-char">
+              {char === " " ? "\u00A0" : char}
             </span>
           ))}
         </p>
@@ -54,4 +57,5 @@ export function Slogan() {
     </section>
   );
 }
+
 

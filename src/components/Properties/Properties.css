@@ -1,6 +1,8 @@
 .properties {
   position: relative;
-  padding: 0 0 210rem;
+  z-index: 10;
+  background: var(--c4);
+  padding: 80rem 0 210rem;
 }
 
 .properties-heading {
