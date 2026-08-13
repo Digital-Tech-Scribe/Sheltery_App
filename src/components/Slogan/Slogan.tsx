@@ -3,59 +3,43 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Slogan.css";
 
-const SLOGAN_TEXT =
-  "The Sheltery's business model is simple: Get into the real estate market near its low point and get out before an economic downturn.";
+const SLOGAN_TEXT = "The Sheltery's business model is simple: Get into the real estate market near its low point and get out before an economic downturn.";
 
 export function Slogan() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const chars = SLOGAN_TEXT.split("");
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-
     const ctx = gsap.context(() => {
-      const charElements = sectionRef.current?.querySelectorAll(".slogan-char");
-      if (!charElements || charElements.length === 0) return;
+      const covers = sectionRef.current?.querySelectorAll(".slogan-cover");
+      if (!covers) return;
 
-      gsap.set(charElements, { color: "rgba(242, 241, 237, 0.15)" });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=140%",
-          pin: true,
-          scrub: 0.3,
-          anticipatePin: 1,
-        },
-      });
-
-      tl.to(charElements, {
-        color: "#FFFFFF",
-        stagger: {
-          amount: 1,
+      covers.forEach((cover) => {
+        gsap.set(cover, { width: 0 });
+        gsap.to(cover, {
+          width: "100%",
           ease: "none",
-        },
-        ease: "none",
+          scrollTrigger: {
+            trigger: cover,
+            start: "top 90%",
+            end: "top 40%",
+            scrub: true,
+          },
+        });
       });
-    }, sectionRef);
+    });
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section className="slogan-section" ref={sectionRef}>
-      <div className="slogan-container">
-        <p className="slogan-text">
-          {chars.map((char, index) => (
-            <span key={index} className="slogan-char">
-              {char === " " ? "\u00A0" : char}
-            </span>
-          ))}
-        </p>
+    <div className="slogan" ref={sectionRef}>
+      <div className="slogan-text">
+        <span className="slogan-line">
+          {SLOGAN_TEXT}
+          <span className="slogan-cover">{SLOGAN_TEXT}</span>
+        </span>
       </div>
-    </section>
+    </div>
   );
 }
-
-
