@@ -13,9 +13,6 @@ firebase-debug.log
 UI-ISSUES-REPORT.md
 
 # Media / Design Files
-*.png
-*.jpg
-*.jpeg
 *.pdf
 
 # But DO track site images in public/assets and logo
