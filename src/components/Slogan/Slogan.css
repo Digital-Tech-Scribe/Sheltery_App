@@ -1,47 +1,50 @@
-.slogan {
-  max-width: 1395rem;
-  margin: 0 auto 160rem;
+.slogan-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  background: var(--c4);
+  margin: 0 0 40rem;
+}
+
+.slogan-container {
+  max-width: 1395rem;
+  margin: 0 auto;
+  padding: 0 40rem;
+  text-align: center;
 }
 
 .slogan-text {
   text-align: center;
-  font-family: 'NanumMyeongjo';
+  font-family: 'NanumMyeongjo', serif;
   font-size: var(--high);
   font-weight: 400;
-  line-height: 120%;
+  line-height: 125%;
   letter-spacing: -2.88rem;
+  margin: 0;
 }
 
-.slogan-line {
-  position: relative;
-  color: rgba(242, 241, 237, 0.10);
+.slogan-word {
   display: inline-block;
-}
-
-.slogan-cover {
-  position: absolute;
-  left: 0;
-  top: 0;
-  color: var(--c1);
-  overflow: hidden;
-  width: 0%;
-  white-space: nowrap;
+  color: rgba(242, 241, 237, 0.15);
+  transition: color 0.15s ease-out;
+  white-space: pre-wrap;
 }
 
 @media screen and (max-width: 1023px) {
-  .slogan {
-    max-width: none;
-    margin: 0 auto 80px;
+  .slogan-section {
+    min-height: 75vh;
+    margin-bottom: 24px;
+  }
+
+  .slogan-container {
+    padding: 0 24px;
   }
 
   .slogan-text {
-    line-height: 130%;
+    line-height: 135%;
     letter-spacing: -0.96px;
-  }
-
-  .slogan-line,
-  .slogan-cover {
-    white-space: normal;
   }
 }
