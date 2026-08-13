@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./Loader.css";
 
 interface LoaderProps {
   onComplete: () => void;
   onAnimate?: () => void;
 }
+
+const LOGO_SOURCES = [
+  `${import.meta.env.BASE_URL}THE_SHELTERY_RED.png`,
+  `${import.meta.env.BASE_URL}the-sheltery-logo.svg`,
+];
 
 const NORMAL_TIMING = {
   animate: 1200,
@@ -19,6 +24,8 @@ const REDUCED_MOTION_TIMING = {
 };
 
 export function Loader({ onComplete, onAnimate }: LoaderProps) {
+  const [logoFailed, setLogoFailed] = useState(false);
+  const [logoSourceIndex, setLogoSourceIndex] = useState(0);
   const loaderRef = useRef<HTMLDivElement>(null);
   const completeRef = useRef(onComplete);
   completeRef.current = onComplete;
@@ -33,7 +40,13 @@ export function Loader({ onComplete, onAnimate }: LoaderProps) {
     animateRef.current?.();
   }, []);
 
-  const logoSource = `${import.meta.env.BASE_URL}THE_SHELTERY_RED.png`;
+  const handleLogoError = useCallback(() => {
+    if (logoSourceIndex < LOGO_SOURCES.length - 1) {
+      setLogoSourceIndex(logoSourceIndex + 1);
+    } else {
+      setLogoFailed(true);
+    }
+  }, [logoSourceIndex]);
 
   useEffect(() => {
     document.body.classList.add("is-loader");
@@ -81,7 +94,14 @@ export function Loader({ onComplete, onAnimate }: LoaderProps) {
     >
       <div className="loader-bg" />
       <div className="loader-box">
-        <img className="loader-logo" src={logoSource} alt="The Sheltery" />
+        {logoFailed ? (
+          <div className="loader-logo-text">
+            <span className="loader-logo-kicker">The</span>
+            <span className="loader-logo-name">Sheltery</span>
+          </div>
+        ) : (
+          <img className="loader-logo" src={LOGO_SOURCES[logoSourceIndex]} alt="The Sheltery" onError={handleLogoError} />
+        )}
         <div className="line">
           <div className="line-inner">Unlock exceptional</div>
         </div>

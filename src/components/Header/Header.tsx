@@ -7,8 +7,15 @@ interface HeaderProps {
   content: HeaderContentType;
 }
 
+const LOGO_SOURCES = [
+  `${import.meta.env.BASE_URL}THE_SHELTERY_RED.png`,
+  `${import.meta.env.BASE_URL}the-sheltery-logo.svg`,
+];
+
 export function Header({ content }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [logoSourceIndex, setLogoSourceIndex] = useState(0);
+  const [logoFailed, setLogoFailed] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -19,7 +26,14 @@ export function Header({ content }: HeaderProps) {
   const closeMenu = useCallback(() => setMenuOpen(false), []);
   const sectionHref = (target?: string) =>
     location.pathname === "/" ? `#${target}` : `${import.meta.env.BASE_URL}#${target}`;
-  const logoSource = `${import.meta.env.BASE_URL}THE_SHELTERY_RED.png`;
+
+  const handleLogoError = useCallback(() => {
+    if (logoSourceIndex < LOGO_SOURCES.length - 1) {
+      setLogoSourceIndex(logoSourceIndex + 1);
+    } else {
+      setLogoFailed(true);
+    }
+  }, [logoSourceIndex]);
 
   return (
     <header className="header">
@@ -36,7 +50,15 @@ export function Header({ content }: HeaderProps) {
 
           <div className="header-logo">
             <Link to="/" aria-label="The Sheltery home">
-              <img src={logoSource} alt="The Sheltery" />
+              {logoFailed ? (
+                <span className="header-logo-text">
+                  <span className="header-logo-kicker">{content.logoKicker}</span>
+                  <span className="header-logo-name">{content.logo}</span>
+                  <span className="header-logo-sub">{content.logoSub}</span>
+                </span>
+              ) : (
+                <img src={LOGO_SOURCES[logoSourceIndex]} alt="The Sheltery" onError={handleLogoError} />
+              )}
             </Link>
           </div>
 

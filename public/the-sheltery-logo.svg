@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="76" viewBox="0 0 300 76" fill="none" role="img" aria-labelledby="sheltery-logo-title">
+  <title id="sheltery-logo-title">The Sheltery</title>
+  <!-- House emblem -->
+  <g>
+    <polygon points="1,42 20,15 39,42" fill="#C8102E" />
+    <rect x="8" y="39" width="24" height="31" fill="#C8102E" />
+    <rect x="16" y="51" width="8" height="19" fill="#DCCBB3" />
+    <rect x="11" y="45" width="4" height="4" fill="#DCCBB3" />
+    <rect x="25" y="45" width="4" height="4" fill="#DCCBB3" />
+  </g>
+  <!-- Wordmark -->
+  <text x="129" y="37" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-weight="400" letter-spacing="4.5" fill="#C8102E">THE</text>
+  <text x="52" y="62" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="400" letter-spacing="5.5" fill="#C8102E">SHELTERY</text>
+</svg>

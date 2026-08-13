@@ -73,11 +73,38 @@
 
 .loader-logo {
   display: block;
-  width: clamp(108px, 8vw, 145px);
+  width: clamp(140px, 12vw, 200px);
   height: auto;
   margin: 0 auto 24px;
   filter: brightness(0) invert(92%) sepia(12%) saturate(410%) hue-rotate(331deg)
     brightness(105%);
+}
+
+/* Fallback wordmark shown while the official logo image is unavailable */
+.loader-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 24px;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.loader-logo-text .loader-logo-kicker {
+  font-family: 'NanumMyeongjo';
+  font-size: 13px;
+  letter-spacing: 5px;
+  color: var(--c2);
+  text-transform: uppercase;
+}
+
+.loader-logo-text .loader-logo-name {
+  font-family: 'NanumMyeongjo';
+  font-size: 26px;
+  letter-spacing: 7px;
+  color: var(--c1);
+  text-transform: uppercase;
 }
 
 .loader-key-wrap {
@@ -123,7 +150,7 @@
   }
 
   .loader-logo {
-    width: 108px;
+    width: 140px;
     margin-bottom: 18px;
   }
 }

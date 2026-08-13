@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { FooterContent as FooterContentType } from "../../types";
 import { Link, useLocation } from "react-router-dom";
 import "./Footer.css";
@@ -6,18 +7,39 @@ interface FooterProps {
   content: FooterContentType;
 }
 
+const LOGO_SOURCES = [
+  `${import.meta.env.BASE_URL}THE_SHELTERY_RED.png`,
+  `${import.meta.env.BASE_URL}the-sheltery-logo.svg`,
+];
+
 export function Footer({ content }: FooterProps) {
+  const [logoFailed, setLogoFailed] = useState(false);
+  const [logoSourceIndex, setLogoSourceIndex] = useState(0);
   const location = useLocation();
   const sectionHref = (target?: string) =>
     location.pathname === "/" ? `#${target}` : `${import.meta.env.BASE_URL}#${target}`;
-  const logoSource = `${import.meta.env.BASE_URL}THE_SHELTERY_RED.png`;
+
+  const handleLogoError = () => {
+    if (logoSourceIndex < LOGO_SOURCES.length - 1) {
+      setLogoSourceIndex(logoSourceIndex + 1);
+    } else {
+      setLogoFailed(true);
+    }
+  };
 
   return (
     <footer className="footer">
       <div className="holder">
         <div className="footer-top">
           <Link className="footer-logo" to="/" aria-label="The Sheltery home">
-            <img src={logoSource} alt="The Sheltery" />
+            {logoFailed ? (
+              <span className="footer-logo-text">
+                <span className="footer-logo-name">{content.logo}</span>
+                <span className="footer-logo-sub">{content.location}</span>
+              </span>
+            ) : (
+              <img src={LOGO_SOURCES[logoSourceIndex]} alt="The Sheltery" onError={handleLogoError} />
+            )}
           </Link>
           <ul className="footer-nav">
             {content.nav.map((item) => (

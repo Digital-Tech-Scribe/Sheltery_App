@@ -13,14 +13,12 @@ firebase-debug.log
 UI-ISSUES-REPORT.md
 
 # Media / Design Files
-*.png
-*.jpg
-*.jpeg
 *.pdf
 
-# But DO track site images in public/assets
+# But DO track site images in public/assets and logo
 !public/assets/
 !public/assets/**
+!public/THE_SHELTERY_RED.png
 
 # Irrelevant Folders
 site-pages/
