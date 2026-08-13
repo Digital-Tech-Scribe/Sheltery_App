@@ -19,8 +19,12 @@ export const properties: PropertyListing[] = [
     heroImage: propertyAsset("hero.jpg"),
     galleryImages: [
       propertyAsset("gallery-01.jpg"),
-      propertyAsset("hero.jpg"),
+      propertyAsset("gallery-02.jpg"),
+      propertyAsset("gallery-03.jpg"),
+      propertyAsset("floor-plan-01.jpg"),
+      propertyAsset("floor-plan-02.jpg"),
       propertyAsset("facilities-01.png"),
+      propertyAsset("hero.jpg"),
     ],
     videoUrl: "https://www.youtube.com/embed/GSzd-O9Cj3E",
     summary:
