@@ -18,9 +18,10 @@ UI-ISSUES-REPORT.md
 *.jpeg
 *.pdf
 
-# But DO track site images in public/assets
+# But DO track site images in public/assets and logo
 !public/assets/
 !public/assets/**
+!public/THE_SHELTERY_RED.png
 
 # Irrelevant Folders
 site-pages/
