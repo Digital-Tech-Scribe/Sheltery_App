@@ -120,8 +120,15 @@ export function PropertyDetailPage() {
                 <div
                   className="gallery-featured-item"
                   onClick={toggleGallery}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      toggleGallery();
+                    }
+                  }}
                   role="button"
                   tabIndex={0}
+                  aria-label="Expand property gallery"
                 >
                   <img src={featuredImage} alt={`${property.name} main preview`} />
                 </div>
@@ -133,8 +140,19 @@ export function PropertyDetailPage() {
                         key={img}
                         className="gallery-stacked-item"
                         onClick={toggleGallery}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            toggleGallery();
+                          }
+                        }}
                         role="button"
                         tabIndex={0}
+                        aria-label={
+                          isLastSlot && remainingCount > 0
+                            ? `View +${remainingCount} more photos`
+                            : `Expand property gallery`
+                        }
                       >
                         <img
                           src={img}
