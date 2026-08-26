@@ -246,7 +246,7 @@ export function PropertyMediaDialog({
             >
               <img
                 src={images[selectedIndex]}
-                alt={`${propertyName}, photo ${selectedIndex + 1}`}
+                alt={`${propertyName} gallery item ${selectedIndex + 1}`}
               />
             </div>
             <div
@@ -298,6 +298,7 @@ export function PropertyMediaDialog({
                   title={`${map.coordinates.label} location map`}
                   src={buildCoordinateMapUrl(map.coordinates)}
                   loading="lazy"
+                  sandbox="allow-scripts allow-popups"
                 />
               </>
             ) : (

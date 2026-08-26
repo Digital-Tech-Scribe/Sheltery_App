@@ -87,6 +87,10 @@ describe("PropertyMedia", () => {
       "src",
       expect.stringContaining("q=9.1%2C7.4"),
     );
+    expect(screen.getByTitle("Hutu Exclusive location map")).toHaveAttribute(
+      "sandbox",
+      "allow-scripts allow-popups",
+    );
     expect(screen.getByText("Hutu Exclusive")).toBeVisible();
     expect(
       screen.queryByRole("link", { name: /open approximate area in maps/i }),
@@ -145,6 +149,10 @@ describe("PropertyMedia", () => {
 
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(screen.getByTitle("Hutu Exclusive video")).toBeInTheDocument();
+    expect(screen.getByTitle("Hutu Exclusive video")).toHaveAttribute(
+      "sandbox",
+      "allow-scripts allow-presentation",
+    );
 
     fireEvent.click(screen.getByRole("button", { name: /close video/i }));
 

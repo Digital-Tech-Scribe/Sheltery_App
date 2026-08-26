@@ -83,6 +83,7 @@ export function PropertyMedia({
               src={`${videoUrl}?autoplay=1`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              sandbox="allow-scripts allow-presentation"
             />
             <button
               ref={closeVideoButtonRef}
@@ -102,7 +103,7 @@ export function PropertyMedia({
               onClick={(event) => openDialog(0, event.currentTarget)}
               aria-label={`View photo 1 of ${images.length}`}
             >
-              <img src={images[0]} alt={`${propertyName}, photo 1`} />
+              <img src={images[0]} alt="" />
             </button>
             <span className="property-media__status">{status}</span>
             {videoUrl && (
@@ -133,7 +134,7 @@ export function PropertyMedia({
                 onClick={(event) => openDialog(imageIndex, event.currentTarget)}
                 aria-label={`View photo ${imageIndex + 1} of ${images.length}`}
               >
-                <img src={image} alt={`${propertyName}, photo ${imageIndex + 1}`} />
+                <img src={image} alt="" />
                 {isLastPreview && (
                   <span className="property-media__view-all">
                     View all {images.length} photos
