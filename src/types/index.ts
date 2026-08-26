@@ -87,6 +87,20 @@ export interface MapCoordinates {
   label: string;
 }
 
+export type PropertyMap =
+  | {
+      state: "unverified";
+      fallbackLabel: string;
+    }
+  | {
+      state: "verified";
+      coordinates: MapCoordinates;
+      verification: {
+        source: string;
+        verifiedAt: string;
+      };
+    };
+
 export interface PropertyListing {
   id: string;
   slug: string;
@@ -114,4 +128,5 @@ export interface PropertyListing {
   features: string[];
   paymentPlan?: string;
   whatsappLink?: string;
+  map: PropertyMap;
 }

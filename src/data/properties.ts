@@ -27,6 +27,10 @@ export const properties: PropertyListing[] = [
       propertyAsset("hero.jpg"),
     ],
     videoUrl: "https://www.youtube.com/embed/GSzd-O9Cj3E",
+    map: {
+      state: "unverified",
+      fallbackLabel: "Exact Hutu Exclusive estate coordinates are being verified.",
+    },
     summary:
       "Spacious plots of land (150sqm – 1000sqm) ideal for custom builds. Exquisitely designed residences from 1-Bedroom Apartments to expansive 7-Bedroom Maisonettes.",
     description: `Hutu Exclusive: An Estate designed for You to Live, Play and Relax
