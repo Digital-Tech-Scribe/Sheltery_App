@@ -46,3 +46,7 @@ build/
 *.spec.js
 *.spec.ts
 coverage/
+
+# Keep source tests under version control while ignoring generated and ad-hoc tests.
+!src/**/*.test.ts
+!src/**/*.test.tsx

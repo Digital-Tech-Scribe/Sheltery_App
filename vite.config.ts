@@ -1,6 +1,6 @@
 import { cpSync, existsSync } from "node:fs";
 import { join } from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
 function spaFallbackPlugin() {
@@ -16,5 +16,10 @@ function spaFallbackPlugin() {
 
 export default defineConfig({
   plugins: [react(), spaFallbackPlugin()],
-  base: "/Sheltery_App/"
+  base: "/Sheltery_App/",
+  test: {
+    environment: "jsdom",
+    setupFiles: "./src/test/setup.ts",
+    clearMocks: true,
+  },
 });

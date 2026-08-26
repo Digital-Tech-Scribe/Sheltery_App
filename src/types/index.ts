@@ -80,6 +80,13 @@ export interface PricingTable {
   paymentPlan?: string;
 }
 
+export interface MapCoordinates {
+  lat: number;
+  lng: number;
+  zoom: number;
+  label: string;
+}
+
 export interface PropertyListing {
   id: string;
   slug: string;
