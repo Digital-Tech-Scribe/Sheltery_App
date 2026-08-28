@@ -60,12 +60,6 @@ export function PropertyDetailPage() {
     ["Construction", property.propertyOverview.constructionStatus],
   ].filter((item): item is [string, string] => Boolean(item[1]));
 
-  const summarySpecs = [
-    property.propertyOverview.propertySize,
-    property.propertyType,
-    property.title,
-  ].filter((item): item is string => Boolean(item));
-
   return (
     <div className="detail-page">
       <Header content={headerContent} />
@@ -100,31 +94,25 @@ export function PropertyDetailPage() {
                 {property.name}
               </h1>
               <p className="property-summary">{property.summary}</p>
-              <p className="property-location-line">{property.location}</p>
-            </div>
+              <div className="property-price-action-row">
+                {property.priceRange && (
+                  <p className="property-price-headline">{property.priceRange}</p>
+                )}
 
-            {property.priceRange && (
-              <p className="property-price-headline">{property.priceRange}</p>
-            )}
-
-            <div className="property-specs-action-bar">
-              <div className="property-specs" aria-label="Property highlights">
-                {summarySpecs.map((spec) => (
-                  <span key={spec}>{spec}</span>
-                ))}
+                {property.whatsappLink && (
+                  <a
+                    className="property-whatsapp-cta"
+                    href={property.whatsappLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Chat on WhatsApp"
+                  >
+                    <WhatsAppIcon />
+                    <span className="sr-only">Chat on WhatsApp</span>
+                  </a>
+                )}
               </div>
-              {property.whatsappLink && (
-                <a
-                  className="property-whatsapp-cta"
-                  href={property.whatsappLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="Chat on WhatsApp"
-                >
-                  <WhatsAppIcon />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              )}
+              <p className="property-location-line">{property.location}</p>
             </div>
           </section>
 

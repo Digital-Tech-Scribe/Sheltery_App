@@ -21,12 +21,10 @@ export const properties: PropertyListing[] = [
       propertyAsset("gallery-01.jpg"),
       propertyAsset("gallery-02.jpg"),
       propertyAsset("gallery-03.jpg"),
-      propertyAsset("floor-plan-01.jpg"),
-      propertyAsset("floor-plan-02.jpg"),
       propertyAsset("facilities-01.png"),
       propertyAsset("hero.jpg"),
     ],
-    videoUrl: "https://www.youtube.com/embed/GSzd-O9Cj3E",
+    videoUrl: "https://www.youtube.com/embed/pWYIeRpM_ec",
     map: {
       state: "unverified",
       fallbackLabel: "Exact Hutu Exclusive estate coordinates are being verified.",

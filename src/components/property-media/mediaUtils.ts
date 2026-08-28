@@ -8,6 +8,10 @@ export function buildMapsSearchUrl(location: string) {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 }
 
+export function buildApproximateMapUrl(location: string) {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(location)}&z=13&output=embed`;
+}
+
 export function buildCoordinateMapUrl({ lat, lng, zoom }: MapCoordinates) {
   if (!Number.isFinite(lat) || lat < -90 || lat > 90) {
     throw new RangeError("Map latitude must be between -90 and 90.");

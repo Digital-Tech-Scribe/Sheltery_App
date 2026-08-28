@@ -14,6 +14,16 @@ export interface PropertyMediaProps {
   map: PropertyMap;
 }
 
+function PlayIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5.14v14l11-7-11-7z" />
+    </svg>
+  );
+}
+
+
+
 export function PropertyMedia({
   propertyName,
   status,
@@ -33,8 +43,10 @@ export function PropertyMedia({
   const openerRef = useRef<HTMLButtonElement | null>(null);
   const playButtonRef = useRef<HTMLButtonElement | null>(null);
   const closeVideoButtonRef = useRef<HTMLButtonElement | null>(null);
+  const featuredRef = useRef<HTMLDivElement | null>(null);
   const shouldRestoreDialogFocus = useRef(false);
   const shouldRestoreVideoFocus = useRef(false);
+  const hasAutoPlayedRef = useRef(false);
 
   useEffect(() => {
     if (!isDialogOpen && shouldRestoreDialogFocus.current) {
@@ -49,6 +61,39 @@ export function PropertyMedia({
       shouldRestoreVideoFocus.current = false;
     }
   }, [isPlayingVideo]);
+
+  useEffect(() => {
+    if (!videoUrl || hasAutoPlayedRef.current || isPlayingVideo) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = featuredRef.current;
+    if (!el) return;
+    const triggerAutoPlay = () => {
+      if (hasAutoPlayedRef.current) return;
+      hasAutoPlayedRef.current = true;
+      setIsPlayingVideo(true);
+    };
+    if (typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          triggerAutoPlay();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25, rootMargin: "0px 0px -10% 0px" },
+    );
+    observer.observe(el);
+    const t = window.setTimeout(() => {
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inView) triggerAutoPlay();
+    }, 1200);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(t);
+    };
+  }, [videoUrl, isPlayingVideo]);
 
   const openDialog = (index: number, opener: HTMLButtonElement) => {
     openerRef.current = opener;
@@ -75,15 +120,16 @@ export function PropertyMedia({
 
   return (
     <section className="property-media" aria-label={`${propertyName} media preview`}>
-      <div className="property-media__featured-wrap">
+      <div ref={featuredRef} className="property-media__featured-wrap">
         {isPlayingVideo && videoUrl ? (
           <div className="property-media__inline-video">
             <iframe
               title={`${propertyName} video`}
-              src={`${videoUrl}?autoplay=1`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              src={`${videoUrl}?autoplay=1&mute=1&enablejsapi=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&disablekb=1&fs=0`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              sandbox="allow-scripts allow-presentation"
+              referrerPolicy="strict-origin-when-cross-origin"
+              sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
             />
             <button
               ref={closeVideoButtonRef}
@@ -92,7 +138,7 @@ export function PropertyMedia({
               onClick={closeVideo}
               aria-label="Close video"
             >
-              Close video
+              ×
             </button>
           </div>
         ) : (
@@ -109,12 +155,12 @@ export function PropertyMedia({
             {videoUrl && (
               <button
                 ref={playButtonRef}
-                className="property-media__play"
+                className="property-media__play property-media__play--icon-only"
                 type="button"
                 onClick={openVideo}
+                aria-label="Play film"
               >
-                <span aria-hidden="true">▶</span>
-                Play film
+                <PlayIcon />
               </button>
             )}
           </>

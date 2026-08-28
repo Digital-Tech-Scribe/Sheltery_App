@@ -7,7 +7,7 @@ import {
 } from "react";
 import type { FocusEvent, KeyboardEvent } from "react";
 import type { PropertyMap } from "../../types";
-import { buildCoordinateMapUrl, buildMapsSearchUrl } from "./mediaUtils";
+import { buildApproximateMapUrl, buildCoordinateMapUrl, buildMapsSearchUrl } from "./mediaUtils";;
 import { useMediaCarousel } from "./useMediaCarousel";
 
 type MediaTab = "photos" | "map";
@@ -264,14 +264,6 @@ export function PropertyMediaDialog({
                 ‹
               </button>
               <button
-                className="property-media-dialog__pause"
-                type="button"
-                onClick={toggleUserPaused}
-                aria-pressed={isUserPaused}
-              >
-                {isUserPaused ? "Play slideshow" : "Pause slideshow"}
-              </button>
-              <button
                 className="property-media-dialog__arrow property-media-dialog__arrow--next"
                 type="button"
                 aria-label={`Next photo, ${(selectedIndex + 1) % images.length + 1} of ${images.length}`}
@@ -280,8 +272,18 @@ export function PropertyMediaDialog({
                 ›
               </button>
             </div>
-            <div className="property-media-dialog__counter" aria-live="polite">
-              {selectedIndex + 1} / {images.length}
+            <div className="property-media-dialog__footer">
+              <button
+                className="property-media-dialog__pause"
+                type="button"
+                onClick={toggleUserPaused}
+                aria-pressed={isUserPaused}
+              >
+                {isUserPaused ? "Play slideshow" : "Pause slideshow"}
+              </button>
+              <div className="property-media-dialog__counter" aria-hidden="true">
+                {selectedIndex + 1} / {images.length}
+              </div>
             </div>
           </section>
         ) : (
@@ -302,16 +304,25 @@ export function PropertyMediaDialog({
                 />
               </>
             ) : (
-              <div className="property-media-dialog__map-fallback">
-                <p>{map.fallbackLabel}</p>
-                <a
-                  href={buildMapsSearchUrl(location)}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Open approximate area in maps
-                </a>
-              </div>
+              <>
+                <p className="property-media-dialog__map-label">Approximate area</p>
+                <iframe
+                  title={`${propertyName} approximate area map`}
+                  src={buildApproximateMapUrl(location)}
+                  loading="lazy"
+                  sandbox="allow-scripts allow-popups"
+                />
+                <div className="property-media-dialog__map-fallback">
+                  <p>{map.fallbackLabel}</p>
+                  <a
+                    href={buildMapsSearchUrl(location)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open approximate area in maps
+                  </a>
+                </div>
+              </>
             )}
           </section>
         )}

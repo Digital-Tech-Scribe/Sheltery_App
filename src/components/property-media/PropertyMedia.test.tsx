@@ -45,7 +45,10 @@ describe("PropertyMedia", () => {
     expect(
       screen.getByRole("dialog", { name: /hutu exclusive media/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText("2 / 7")).toHaveAttribute("aria-live", "polite");
+    expect(screen.getByText("2 / 7")).toHaveAttribute("aria-hidden", "true");
+    const pause = screen.getByRole("button", { name: /pause slideshow/i });
+    expect(pause).toHaveClass("property-media-dialog__pause");
+    expect(pause.closest(".property-media-dialog__footer")).not.toBeNull();
 
     await user.click(screen.getByRole("button", { name: /close media/i }));
     expect(secondPhoto).toHaveFocus();
@@ -64,7 +67,11 @@ describe("PropertyMedia", () => {
     expect(
       screen.getByRole("link", { name: /open approximate area in maps/i }),
     ).toHaveAttribute("href", expect.stringContaining("google.com/maps/search"));
-    expect(screen.queryByTitle(/location map/i)).not.toBeInTheDocument();
+    expect(screen.getByTitle("Hutu Exclusive approximate area map")).toHaveAttribute(
+      "src",
+      expect.stringContaining("Airport%20Road%2C%20Abuja"),
+    );
+    expect(screen.getByText("Approximate area")).toBeVisible();
   });
 
   it("renders a coordinate-derived iframe and label only for a verified map", async () => {
@@ -103,14 +110,14 @@ describe("PropertyMedia", () => {
 
     const dialog = screen.getByRole("dialog");
     const close = screen.getByRole("button", { name: /close media/i });
-    const next = screen.getByRole("button", { name: /next photo/i });
+    const pause = screen.getByRole("button", { name: /pause slideshow/i });
 
-    next.focus();
+    pause.focus();
     fireEvent.keyDown(dialog, { key: "Tab" });
     expect(close).toHaveFocus();
 
     fireEvent.keyDown(dialog, { key: "Tab", shiftKey: true });
-    expect(next).toHaveFocus();
+    expect(pause).toHaveFocus();
 
     const photosTab = screen.getByRole("tab", { name: "Photos" });
     photosTab.focus();
@@ -151,7 +158,7 @@ describe("PropertyMedia", () => {
     expect(screen.getByTitle("Hutu Exclusive video")).toBeInTheDocument();
     expect(screen.getByTitle("Hutu Exclusive video")).toHaveAttribute(
       "sandbox",
-      "allow-scripts allow-presentation",
+      "allow-scripts allow-same-origin allow-presentation allow-popups",
     );
 
     fireEvent.click(screen.getByRole("button", { name: /close video/i }));

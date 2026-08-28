@@ -1,4 +1,4 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { PropertyDetailPage } from "./PropertyDetailPage";
@@ -17,7 +17,7 @@ function renderDetailPage() {
 }
 
 describe("PropertyDetailPage", () => {
-  it("puts the Hutu identity, supplied summary, factual metadata, and WhatsApp action beneath the media lead", () => {
+  it("puts the Hutu identity, supplied summary, price, and WhatsApp icon beneath the media lead", () => {
     renderDetailPage();
 
     expect(
@@ -28,15 +28,19 @@ describe("PropertyDetailPage", () => {
         "Spacious plots of land (150sqm – 1000sqm) ideal for custom builds. Exquisitely designed residences from 1-Bedroom Apartments to expansive 7-Bedroom Maisonettes.",
       ),
     ).toBeInTheDocument();
-    const highlights = screen.getByLabelText("Property highlights");
-    expect(within(highlights).getByText("150SQM – 1000SQM")).toBeInTheDocument();
-    expect(within(highlights).getByText("Residential")).toBeInTheDocument();
+    expect(
+      screen.getByText(/₦9,351,562\.5 – ₦136,080,000 \(Land\)/),
+    ).toBeInTheDocument();
+    expect(screen.queryByLabelText("Property highlights")).not.toBeInTheDocument();
     const whatsappAction = screen
       .getAllByRole("link", { name: /chat on whatsapp/i })
       .find((link) => link.classList.contains("property-whatsapp-cta"));
     expect(whatsappAction).toHaveAttribute(
       "href",
       expect.stringContaining("wa.me/2348092799692"),
+    );
+    expect(whatsappAction?.querySelector(".sr-only")).toHaveTextContent(
+      "Chat on WhatsApp",
     );
     expect(
       screen.getByRole("region", { name: /hutu exclusive media preview/i }),
